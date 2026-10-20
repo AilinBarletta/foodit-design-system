@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="es" data-brand="foodit">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documentación — Design System La Nación / Foodit</title>
+
+<!-- Orden de carga: global-primitives → foodit → core-semantic → components -->
+<link rel="stylesheet" href="global-primitives.css">
+<link rel="stylesheet" href="foodit.css">
+<link rel="stylesheet" href="core-semantic.css">
+<link rel="stylesheet" href="components.css">
+
+<style>
+  body {
+    margin: var(--p-none);
+    background-color: var(--bg-neutral-50);
+    color: var(--text-neutral-900);
+    font-family: var(--font-secondary), sans-serif;
+  }
+
+  a {
+    color: var(--text-primary-default);
+  }
+
+  code,
+  pre {
+    font-family: var(--font-secondary), sans-serif;
+  }
+
+  /* ---------- Topbar ---------- */
+  .docs-topbar {
+    position: sticky;
+    inset-block-start: var(--p-none);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--gap-16);
+    padding: var(--p-16) var(--p-responsive);
+    background-color: var(--bg-neutral-1);
+    border-block-end: var(--border-sm) solid var(--border-muted);
+  }
+
+  .docs-topbar__title {
+    margin: var(--p-none);
+    font-size: var(--text-body-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+  }
+
+  .docs-topbar__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gap-8);
+  }
+
+  /* ---------- Nav ---------- */
+  .docs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-8);
+    padding: var(--p-12) var(--p-responsive);
+    background-color: var(--bg-neutral-1);
+    border-block-end: var(--border-sm) solid var(--border-muted);
+  }
+
+  .docs-nav a {
+    text-decoration: none;
+    font-size: var(--text-label-sm);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    line-height: 1; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+    padding: var(--p-6) var(--p-8);
+    border-radius: var(--components-chip-radius);
+  }
+
+  .docs-nav a:hover {
+    background-color: var(--bg-primary-default-opacity-15);
+  }
+
+  /* ---------- Layout ---------- */
+  .docs-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-40);
+    padding: var(--p-responsive);
+    max-inline-size: var(--breakpoint-web-xl);
+    margin-inline: auto;
+  }
+
+  .docs-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-16);
+    scroll-margin-block-start: var(--size-96);
+  }
+
+  .docs-section > h2 {
+    margin: var(--p-none);
+    padding-block-end: var(--p-8);
+    border-block-end: var(--border-sm) solid var(--border-muted);
+    font-family: var(--font-primary), serif;
+    font-size: var(--text-heading-sm);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+  }
+
+  .docs-section h3 {
+    margin: var(--p-none);
+    font-size: var(--text-subheading-sm);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+  }
+
+  .docs-section p,
+  .docs-section li {
+    font-size: var(--text-body-md);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .docs-section p {
+    margin: var(--p-none);
+  }
+
+  .docs-section ul {
+    margin: var(--p-none);
+    padding-inline-start: var(--p-20);
+  }
+
+  .lede {
+    color: var(--text-neutral-600);
+  }
+
+  /* ---------- Tablas ---------- */
+  .table-wrap {
+    overflow-x: auto;
+    border: var(--border-sm) solid var(--border-muted);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-neutral-1);
+  }
+
+  table {
+    border-collapse: collapse;
+    inline-size: 100%;
+  }
+
+  th,
+  td {
+    padding: var(--p-8) var(--p-12);
+    text-align: start;
+    font-size: var(--text-small-lg);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    border-block-end: var(--border-sm) solid var(--border-muted);
+    vertical-align: middle;
+  }
+
+  th {
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    color: var(--text-neutral-900);
+    background-color: var(--bg-neutral-50);
+  }
+
+  td {
+    color: var(--text-neutral-600);
+  }
+
+  tr:last-child td {
+    border-block-end: var(--border-none);
+  }
+
+  .swatch {
+    display: inline-block;
+    inline-size: var(--size-24);
+    block-size: var(--size-24);
+    border-radius: var(--radius-sm);
+    border: var(--border-sm) solid var(--border-muted);
+    vertical-align: middle;
+    margin-inline-end: var(--gap-8);
+  }
+
+  .token-name {
+    font-weight: var(--font-weight-bold);
+    color: var(--text-neutral-900);
+  }
+
+  /* ---------- Ejemplos ---------- */
+  .example-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-8);
+  }
+
+  .example-group__title {
+    font-size: var(--text-label-sm);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    line-height: 1; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-600);
+  }
+
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--breakpoint-web-sm), 1fr));
+    gap: var(--gap-12);
+  }
+
+  .example-grid--wide {
+    grid-template-columns: repeat(auto-fill, minmax(var(--breakpoint-web-md), 1fr));
+  }
+
+  .example {
+    margin: var(--p-none);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-4);
+  }
+
+  .example__box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gap-8);
+    padding: var(--p-16);
+    border: var(--border-sm) solid var(--border-muted);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-neutral-1);
+    min-block-size: var(--size-64);
+  }
+
+  .example__box--dark {
+    background-color: var(--bg-neutral-999);
+  }
+
+  .example figcaption {
+    font-size: var(--text-small-md);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-600);
+  }
+
+  .example figcaption code {
+    font-size: var(--text-small-md);
+  }
+
+  .examples {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-24);
+  }
+
+  .field-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-4);
+    inline-size: 100%;
+  }
+
+  /* ---------- Código ---------- */
+  pre {
+    margin: var(--p-none);
+    padding: var(--p-16);
+    overflow-x: auto;
+    border: var(--border-sm) solid var(--border-muted);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-neutral-999);
+    color: var(--text-neutral-1);
+    font-size: var(--text-small-lg);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+  }
+
+  pre code {
+    color: inherit;
+    font-size: inherit;
+  }
+
+  /* ---------- Lista de props ---------- */
+  .props {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-8);
+  }
+
+  @media (min-width: 768px) {
+    .props {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .prop {
+    padding: var(--p-12);
+    border: var(--border-sm) solid var(--border-muted);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-neutral-1);
+  }
+
+  .prop b {
+    display: block;
+    font-size: var(--text-label-sm);
+    text-transform: uppercase;
+    line-height: 1; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .prop span {
+    font-size: var(--text-small-lg);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-600);
+  }
+</style>
+</head>
+
+<body>
+
+<header class="docs-topbar">
+  <p class="docs-topbar__title">Design System La Nación — Documentación</p>
+  <div class="docs-topbar__tools">
+    <a class="ds-btn" href="index.html" data-variant="ghost" data-color="black" data-size="32">
+      <span class="ds-btn__label">Índice</span>
+    </a>
+    <a class="ds-btn" href="prototipo/index.html" data-variant="outline" data-color="black" data-size="32">
+      <span class="ds-btn__label">Prototipo</span>
+    </a>
+    <button class="ds-btn" type="button" id="mode-toggle" data-variant="solid" data-color="black" data-size="32" aria-pressed="false">
+      <span class="ds-btn__label">Modo oscuro</span>
+    </button>
+  </div>
+</header>
+
+<nav class="docs-nav" aria-label="Secciones">
+  <a href="#tokens">Tokens</a>
+  <a href="#button">Button</a>
+  <a href="#input">Input</a>
+  <a href="#chip">Chip</a>
+  <a href="#badge">Badge</a>
+  <a href="#alert">Alert</a>
+  <a href="#toast">Toast</a>
+  <a href="#card">Card</a>
+  <a href="#faltantes">Tokens faltantes</a>
+</nav>
+
+<main class="docs-main">
+
+  <!-- ============================ Intro ============================ -->
+  <section class="docs-section" id="intro">
+    <h2>Cómo leer esta documentación</h2>
+    <p class="lede">
+      Los componentes usan <b>solo</b> variables de <code>core-semantic.css</code>,
+      más espaciados y tamaños de <code>global-primitives.css</code>. Nunca se
+      referencian <code>--foo-*</code> directamente: siempre se pasa por Core.
+      Cuando un valor no tiene token en Figma aparece un
+      <code>/* TODO: token no definido en Figma */</code>.
+    </p>
+    <ul>
+      <li>Orden de carga: <code>global-primitives.css</code> → <code>foodit.css</code> → <code>core-semantic.css</code> → <code>components.css</code>.</li>
+      <li>Marca y modo viven en <code>&lt;html&gt;</code>: <code>data-brand="foodit"</code> y <code>data-mode="dark"</code>.</li>
+      <li>Cada ejemplo muestra los <code>data-*</code> que lo definen. Los estados se muestran forzados (<code>data-state="hover"</code> / <code>.is-hover</code>) además de los pseudo-clases reales (<code>:hover</code>, <code>:focus-within</code>, <code>:disabled</code>).</li>
+      <li>Las tablas de tokens resuelven el valor computado en vivo: al cambiar el modo oscuro se actualizan.</li>
+    </ul>
+  </section>
+
+  <!-- ============================ Tokens ============================ -->
+  <section class="docs-section" id="tokens">
+    <h2>1. Tokens</h2>
+
+    <h3>1.1 Intenciones de color (Core)</h3>
+    <p class="lede">
+      Convención: para cada intención existen capas de fondo (<code>--bg-*</code>),
+      texto (<code>--text-*</code>) y borde (<code>--border-*</code>), con los
+      estados <code>default | dark | light | lighten | foreground</code> y
+      transparencias <code>-opacity-15</code> / <code>-opacity-60</code>.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Intención</th>
+            <th>bg default</th>
+            <th>bg light</th>
+            <th>bg lighten</th>
+            <th>bg foreground</th>
+            <th>text default</th>
+            <th>text foreground</th>
+            <th>border default</th>
+          </tr>
+        </thead>
+        <tbody id="table-intents"></tbody>
+      </table>
+    </div>
+
+    <h3>1.2 Neutros y utilidades</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Token</th><th>Valor</th><th>Token</th><th>Valor</th><th>Token</th><th>Valor</th></tr>
+        </thead>
+        <tbody id="table-neutrals"></tbody>
+      </table>
+    </div>
+
+    <h3>1.3 Tipografía</h3>
+    <p class="lede">
+      UI: <code>font-family: var(--font-secondary), sans-serif</code>.
+      Títulos editoriales: <code>var(--font-primary), serif</code>.
+      Interlineados de la spec: 1 (labels), 1.2 (títulos/small), 1.5 (body) —
+      no hay token de line-height (ver <a href="#faltantes">tokens faltantes</a>).
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Token</th><th>Tamaño resuelto</th><th>Ejemplo</th></tr>
+        </thead>
+        <tbody id="table-type"></tbody>
+      </table>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Token</th><th>Valor</th><th>Uso</th></tr>
+        </thead>
+        <tbody id="table-fonts"></tbody>
+      </table>
+    </div>
+
+    <h3>1.4 Espaciados, tamaños y medidas</h3>
+    <p class="lede">
+      De <code>global-primitives.css</code>: <code>--p-*</code> (padding),
+      <code>--gap-*</code> (gap) y <code>--size-*</code> (medidas). Core agrega
+      <code>--p-responsive</code> y <code>--gap-responsive</code>.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Padding</th><th>Valor</th><th>Gap</th><th>Valor</th><th>Size</th><th>Valor</th></tr>
+        </thead>
+        <tbody id="table-space"></tbody>
+      </table>
+    </div>
+
+    <h3>1.5 Radios y tokens de componente</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Token</th><th>Valor resuelto</th><th>Definido en</th></tr>
+        </thead>
+        <tbody id="table-radius"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================ Button ============================ -->
+  <section class="docs-section" id="button">
+    <h2>2. Button</h2>
+    <div class="props">
+      <p class="prop"><b>variant</b><span>solid | outline | ghost</span></p>
+      <p class="prop"><b>color</b><span>primary | secondary | accent | subscription | error | black | white</span></p>
+      <p class="prop"><b>size</b><span>48 | 40 | 32</span></p>
+      <p class="prop"><b>state</b><span>default | hover | loading | disabled</span></p>
+      <p class="prop"><b>isOnlyIcon</b><span>ancho = alto (<code>data-only-icon</code>)</span></p>
+      <p class="prop"><b>íconos</b><span>opcionales a izquierda (<code>.ds-btn__icon</code>) y derecha</span></p>
+    </div>
+
+    <h3>Medidas y tokens</h3>
+    <ul>
+      <li>Radio <code>--components-button-radius</code>. Borde (outline) <code>--components-button-weigth</code>.</li>
+      <li>Padding horizontal: 48 → <code>--p-20</code>, 40 → <code>--p-12</code>, 32 → <code>--p-8</code>. Gap: <code>--gap-8</code> (32 → <code>--gap-4</code>).</li>
+      <li>Ícono: 48 → <code>--size-20</code>, 40 → <code>--size-16</code>, 32 → <code>--size-12</code>.</li>
+      <li>Alto: 48 → <code>--size-48</code>, 40 → <code>--size-40</code>, 32 → <code>--size-32</code>.</li>
+      <li>Texto en mayúsculas, bold, interlineado 1: 48 → <code>--text-label-lg</code>, 40 → <code>--text-label-md</code>, 32 → <code>--text-label-sm</code>.</li>
+      <li>Solid: fondo <code>--bg-{color}-default</code>, texto <code>--text-{color}-foreground</code>; hover <code>--bg-{color}-light</code>; disabled <code>--bg-{color}-lighten</code>.</li>
+      <li>Outline: borde <code>--border-{color}-default</code>, texto <code>--text-{color}-default</code>; hover <code>-light</code>; disabled <code>-lighten</code>.</li>
+      <li>Ghost: texto <code>--text-{color}-default</code>; hover <code>--bg-{color}-default-opacity-15</code> (black → <code>--bg-black-999-opacity-15</code>, white → <code>--bg-white-1-15</code>); disabled <code>--text-{color}-lighten</code>.</li>
+      <li>Loading: spinner en lugar del contenido, mantiene el ancho.</li>
+    </ul>
+
+    <h3>Markup</h3>
+    <pre><code>&lt;button class="ds-btn" type="button"
+        data-variant="solid" data-color="primary" data-size="48"&gt;
+  &lt;span class="ds-btn__icon" aria-hidden="true"&gt;…svg…&lt;/span&gt;
+  &lt;span class="ds-btn__label"&gt;Guardar&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;button class="ds-btn" data-variant="ghost" data-color="black"
+        data-size="32" data-only-icon aria-label="Imprimir"&gt;
+  &lt;span class="ds-btn__icon" aria-hidden="true"&gt;…svg…&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+    <div class="examples" id="btn-examples"></div>
+  </section>
+
+  <!-- ============================ Input ============================ -->
+  <section class="docs-section" id="input">
+    <h2>3. Input</h2>
+    <div class="props">
+      <p class="prop"><b>labelType</b><span>floating | fixed</span></p>
+      <p class="prop"><b>color</b><span>default | gray | error</span></p>
+      <p class="prop"><b>size</b><span>56 | 48</span></p>
+      <p class="prop"><b>state</b><span>enabled | hover | focus | disabled (error sin disabled)</span></p>
+      <p class="prop"><b>íconos</b><span>opcional izquierda/derecha con separador vertical</span></p>
+      <p class="prop"><b>supporting text</b><span>con ícono opcional (<code>.ds-field__supporting</code>)</span></p>
+    </div>
+
+    <h3>Medidas y tokens</h3>
+    <ul>
+      <li>Radio <code>--components-input-radius</code>, borde <code>--border-sm</code>, padding horizontal <code>--p-12</code>, gap <code>--gap-8</code>.</li>
+      <li>Alto: 56 → <code>--size-56</code>, 48 → <code>--size-48</code>. Texto del campo: <code>--text-label-lg</code> (56) / <code>--text-label-md</code> (48).</li>
+      <li>Label y supporting text <code>--text-label-sm</code>; gap entre label fijo y campo <code>--gap-4</code>.</li>
+      <li>Floating: en focus o con valor sube sobre el borde superior con fondo <code>--bg-neutral-1</code> (en gray: <code>--bg-neutral-50</code>).</li>
+      <li>Default: borde <code>--border-base-light</code>; hover <code>--border-base-default</code>; focus <code>--border-base-dark</code> (2px, vía <code>--border-2</code>).</li>
+      <li>Gray: fondo <code>--bg-neutral-50</code>. Error: borde <code>--border-error-*</code> y texto <code>--text-error-default</code>; hover <code>-light</code>; focus <code>-dark</code>.</li>
+      <li>Disabled: borde <code>--border-base-lighten</code>, texto <code>--text-base-lighten</code>. Placeholder: <code>--text-base-light</code>.</li>
+    </ul>
+
+    <h3>Markup</h3>
+    <pre><code>&lt;!-- floating: el label va DENTRO del control, después del input --&gt;
+&lt;div class="ds-field" data-label-type="floating" data-color="default" data-size="56"&gt;
+  &lt;div class="ds-field__control"&gt;
+    &lt;span class="ds-field__icon ds-field__icon--start" aria-hidden="true"&gt;…svg…&lt;/span&gt;
+    &lt;input class="ds-field__input" id="q" type="search" placeholder=" "&gt;
+    &lt;label class="ds-field__label" for="q"&gt;Buscar&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;p class="ds-field__supporting"&gt;Texto de apoyo&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- fixed: el label va FUERA del control, arriba --&gt;
+&lt;div class="ds-field" data-label-type="fixed" data-color="gray" data-size="48"&gt;
+  &lt;label class="ds-field__label" for="mail"&gt;Email&lt;/label&gt;
+  &lt;div class="ds-field__control"&gt;
+    &lt;input class="ds-field__input" id="mail" type="email" placeholder="tu@email.com"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <div class="examples" id="input-examples"></div>
+  </section>
+
+  <!-- ============================ Chip ============================ -->
+  <section class="docs-section" id="chip">
+    <h2>4. Chip</h2>
+    <div class="props">
+      <p class="prop"><b>type</b><span>informative | clickable | closable</span></p>
+      <p class="prop"><b>variant</b><span>solid | outline | ghost</span></p>
+      <p class="prop"><b>color</b><span>primary | secondary | accent | error | black | white</span></p>
+      <p class="prop"><b>size</b><span>30 | 24</span></p>
+      <p class="prop"><b>state</b><span>default | hover | disabled (informative solo default)</span></p>
+      <p class="prop"><b>extras</b><span>ícono opcional; closable agrega separador y “×”</span></p>
+    </div>
+
+    <h3>Medidas y tokens</h3>
+    <ul>
+      <li>Radio <code>--components-chip-radius</code>; padding 30 → <code>--p-8</code>, 24 → <code>--p-6</code>; gap <code>--gap-4</code>.</li>
+      <li>Texto bold: 30 → <code>--text-label-md</code>, 24 → <code>--text-label-sm</code>. Ícono: 30 → <code>--size-14</code>, 24 → <code>--size-12</code>.</li>
+      <li>Colores: misma lógica que Button. Ghost hover: fondo <code>--bg-{color}-light</code> con texto <code>--text-{color}-foreground</code>.</li>
+    </ul>
+
+    <h3>Markup</h3>
+    <pre><code>&lt;button class="ds-chip" type="button"
+        data-type="clickable" data-variant="solid" data-color="primary" data-size="30"&gt;
+  &lt;span class="ds-chip__label"&gt;Pastas&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;button class="ds-chip" type="button"
+        data-type="closable" data-variant="outline" data-color="black" data-size="24"&gt;
+  &lt;span class="ds-chip__label"&gt;Sin gluten&lt;/span&gt;
+  &lt;span class="ds-chip__close" aria-hidden="true"&gt;…svg…&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+
+    <div class="examples" id="chip-examples"></div>
+  </section>
+
+  <!-- ============================ Badge ============================ -->
+  <section class="docs-section" id="badge">
+    <h2>5. Badge</h2>
+    <div class="props">
+      <p class="prop"><b>color</b><span>primary | secondary | accent | subscription | error | black | white</span></p>
+      <p class="prop"><b>variant</b><span>solid | outline</span></p>
+      <p class="prop"><b>size</b><span>lg | md | sm (mapeo interpretado)</span></p>
+      <p class="prop"><b>on-image</b><span>light → <code>--bg-neutral-1-60</code> · dark → <code>--bg-neutral-999-60</code></span></p>
+      <p class="prop"><b>radio</b><span><code>--components-Badge-radius</code></span></p>
+      <p class="prop"><b>texto</b><span>bold, mayúsculas: <code>--text-label-md</code> | <code>--text-label-sm</code> | <code>--text-small-md</code></span></p>
+    </div>
+    <p class="lede">
+      El spec define “padding <code>--p-4</code> a <code>--p-8</code>, gap
+      <code>--gap-2</code>/<code>--gap-4</code>” sin mapear cada tamaño: acá
+      lg → <code>--text-label-md</code> + <code>--p-4</code>/<code>--p-8</code>,
+      md → <code>--text-label-sm</code> + <code>--p-4</code>/<code>--p-6</code>,
+      sm → <code>--text-small-md</code> + <code>--p-4</code> + <code>--gap-2</code>.
+    </p>
+
+    <h3>Markup</h3>
+    <pre><code>&lt;span class="ds-badge" data-variant="solid" data-color="subscription" data-size="sm"&gt;
+  Premium
+&lt;/span&gt;
+&lt;span class="ds-badge" data-variant="solid" data-color="white" data-size="md" data-on-image="light"&gt;
+  Nuevo
+&lt;/span&gt;</code></pre>
+
+    <div class="examples" id="badge-examples"></div>
+  </section>
+
+  <!-- ============================ Alert ============================ -->
+  <section class="docs-section" id="alert">
+    <h2>6. Alert</h2>
+    <div class="props">
+      <p class="prop"><b>type</b><span>success | info | warning | error | skeleton</span></p>
+      <p class="prop"><b>style</b><span>light | solid</span></p>
+      <p class="prop"><b>estructura</b><span>ícono circular (<code>--size-24</code>) + título + descripción + slot</span></p>
+      <p class="prop"><b>radio</b><span><code>--components-alert-radius</code></span></p>
+      <p class="prop"><b>padding / gap</b><span><code>--p-16</code> / <code>--gap-8</code></span></p>
+      <p class="prop"><b>texto</b><span>título bold <code>--text-body-lg</code>; descripción <code>--text-body-sm</code></span></p>
+    </div>
+    <ul>
+      <li>Light: fondo <code>--bg-{type}-lighten</code>, borde <code>--border-{type}-default</code>, título <code>--text-{type}-default</code>, descripción <code>--text-base-default</code>.</li>
+      <li>Solid: fondo <code>--bg-{type}-default</code>, texto <code>--text-{type}-foreground</code>.</li>
+      <li>Ícono circular: light → fondo <code>--bg-{type}-default</code> + glifo <code>--text-{type}-foreground</code>; solid → fondo <code>--bg-{type}-foreground</code> + glifo <code>--text-{type}-default</code> (el spec no define los colores del ícono: decisión documentada).</li>
+      <li>Skeleton: bloques <code>--bg-skeleton</code>, borde <code>--border-skeleton</code>.</li>
+      <li>Títulos de ejemplo: “¡Listo!”, “Información”, “¡Atención!”, “¡Uppps!”.</li>
+    </ul>
+
+    <h3>Markup</h3>
+    <pre><code>&lt;div class="ds-alert" data-type="error" data-style="light" role="alert"&gt;
+  &lt;span class="ds-alert__icon" aria-hidden="true"&gt;…svg…&lt;/span&gt;
+  &lt;div class="ds-alert__body"&gt;
+    &lt;p class="ds-alert__title"&gt;¡Uppps!&lt;/p&gt;
+    &lt;p class="ds-alert__desc"&gt;Descripción del problema.&lt;/p&gt;
+    &lt;div class="ds-alert__slot"&gt;…acciones…&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <div class="examples" id="alert-examples"></div>
+  </section>
+
+  <!-- ============================ Toast ============================ -->
+  <section class="docs-section" id="toast">
+    <h2>7. Toast</h2>
+    <div class="props">
+      <p class="prop"><b>type</b><span>mismos que Alert: success | info | warning | error | skeleton</span></p>
+      <p class="prop"><b>style</b><span>light | solid</span></p>
+      <p class="prop"><b>radio</b><span><code>--components-toast-radius</code></span></p>
+      <p class="prop"><b>sombra</b><span>TODO: token de sombra no definido en Figma</span></p>
+      <p class="prop"><b>estructura</b><span>igual a Alert (<code>.ds-toast__icon/body/title/desc</code>)</span></p>
+      <p class="prop"><b>tokens</b><span>reutiliza los colores <code>--bg/text/border-{type}-*</code></span></p>
+    </div>
+
+    <h3>Markup</h3>
+    <pre><code>&lt;div class="ds-toast" data-type="info" data-style="light" role="status"&gt;
+  &lt;span class="ds-toast__icon" aria-hidden="true"&gt;…svg…&lt;/span&gt;
+  &lt;div class="ds-toast__body"&gt;
+    &lt;p class="ds-toast__title"&gt;Información&lt;/p&gt;
+    &lt;p class="ds-toast__desc"&gt;Tenés 3 reseñas nuevas.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <div class="examples" id="toast-examples"></div>
+  </section>
+
+  <!-- ============================ Card ============================ -->
+  <section class="docs-section" id="card">
+    <h2>8. Card</h2>
+    <div class="props">
+      <p class="prop"><b>fondo</b><span><code>--bg-neutral-1</code></span></p>
+      <p class="prop"><b>borde</b><span><code>--border-sm</code> · <code>--border-muted</code></span></p>
+      <p class="prop"><b>radio</b><span><code>--radius-md</code></span></p>
+      <p class="prop"><b>título</b><span>bold <code>--text-body-lg</code></span></p>
+      <p class="prop"><b>texto</b><span><code>--text-body-md</code> · <code>--text-base-light</code></span></p>
+      <p class="prop"><b>imagen</b><span>placeholder <code>--bg-skeleton</code> (proporción TODO)</span></p>
+    </div>
+
+    <h3>Markup</h3>
+    <pre><code>&lt;article class="ds-card"&gt;
+  &lt;div class="ds-card__media" role="img" aria-label="Placeholder de imagen"&gt;&lt;/div&gt;
+  &lt;div class="ds-card__body"&gt;
+    &lt;p class="ds-card__title"&gt;Título&lt;/p&gt;
+    &lt;p class="ds-card__text"&gt;Texto de la tarjeta.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+
+    <div class="examples" id="card-examples"></div>
+  </section>
+
+  <!-- ============================ Faltantes ============================ -->
+  <section class="docs-section" id="faltantes">
+    <h2>9. Tokens faltantes (TODO)</h2>
+    <p class="lede">
+      Todos los <code>TODO</code> marcados en <code>components.css</code>:
+      valores que la spec pide pero que no existen como token en Figma.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Uso</th><th>Qué se usó</th><th>Motivo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>line-height de labels</td><td><code>1</code></td><td>token de line-height no definido en Figma (spec: 1)</td></tr>
+          <tr><td>line-height de títulos/small</td><td><code>1.2</code></td><td>token de line-height no definido en Figma (spec: 1.2)</td></tr>
+          <tr><td>line-height de body</td><td><code>1.5</code></td><td>token de line-height no definido en Figma (spec: 1.5)</td></tr>
+          <tr><td>Transiciones (todas)</td><td><code>200ms</code> · <code>ease</code></td><td>tokens de duración/easing no definidos en Figma</td></tr>
+          <tr><td>Spinner de Button (loading)</td><td><code>800ms</code> · <code>1turn</code></td><td>tokens de duración de rotación no definidos en Figma</td></tr>
+          <tr><td>Sombra de Toast</td><td><code>(sin sombra)</code></td><td>token de sombra no definido en Figma</td></tr>
+          <tr><td><code>--text-info-foreground</code></td><td><code>--text-info-foregorund</code></td><td>typo en el export de Figma: el token correcto no existe</td></tr>
+          <tr><td>Ícono del Input</td><td><code>--size-24</code></td><td>tamaño de ícono de input no definido (se toma del Alert)</td></tr>
+          <tr><td>Separador vertical del Input</td><td><code>--border-muted</code></td><td>color del separador no definido en Figma</td></tr>
+          <tr><td>Separador del Chip closable</td><td><code>currentColor</code></td><td>color del separador no definido en Figma</td></tr>
+          <tr><td>Label en reposo / supporting text</td><td><code>--text-base-light</code> · <code>--text-base-default</code></td><td>colores no definidos en el spec de Input</td></tr>
+          <tr><td>Fondo de label floating en gray</td><td><code>--bg-neutral-50</code></td><td>fondo de label floating en variante gray no definido</td></tr>
+          <tr><td>Texto disabled (Button solid)</td><td><code>--text-{color}-default</code></td><td>el spec solo define el fondo disabled</td></tr>
+          <tr><td>Borde de Chip / Badge (outline)</td><td><code>--border-sm</code></td><td>ancho de borde propio de estos componentes no definido</td></tr>
+          <tr><td>Ícono circular del Alert</td><td>ver sección Alert</td><td>colores del ícono no definidos en el spec</td></tr>
+          <tr><td>Gap interno del Alert/Toast</td><td><code>--gap-4</code></td><td>gap interno del contenido no definido en Figma</td></tr>
+          <tr><td>Imagen de Card / media</td><td><code>aspect-ratio: 16 / 9</code></td><td>proporción de imagen no definida en Figma</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var css = function () { return getComputedStyle(root); };
+
+  /* ------------------------------------------------------------------
+     Switch de modo oscuro
+     ------------------------------------------------------------------ */
+  var toggle = document.getElementById('mode-toggle');
+  var toggleLabel = toggle.querySelector('.ds-btn__label');
+
+  toggle.addEventListener('click', function () {
+    if (root.getAttribute('data-mode') === 'dark') {
+      root.removeAttribute('data-mode');
+    } else {
+      root.setAttribute('data-mode', 'dark');
+    }
+    var dark = root.getAttribute('data-mode') === 'dark';
+    toggle.setAttribute('aria-pressed', String(dark));
+    toggleLabel.textContent = dark ? 'Modo claro' : 'Modo oscuro';
+    renderTokenValues();
+  });
+
+  /* ------------------------------------------------------------------
+     Utilidades DOM
+     ------------------------------------------------------------------ */
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    }
+    if (text != null) { n.textContent = text; }
+    return n;
+  }
+
+  function tokenCell(name) {
+    var td = el('td');
+    var sw = el('span', { class: 'swatch', 'data-swatch': name, title: name });
+    sw.style.backgroundColor = 'var(' + name + ')';
+    td.appendChild(sw);
+    td.appendChild(el('code', { class: 'token-name' }, name));
+    return td;
+  }
+
+  function groupTitle(text) {
+    return el('p', { class: 'example-group__title' }, text);
+  }
+
+  function makeGroup(container, title) {
+    var wrap = el('div', { class: 'example-group' });
+    wrap.appendChild(groupTitle(title));
+    var grid = el('div', { class: 'example-grid' });
+    wrap.appendChild(grid);
+    container.appendChild(wrap);
+    return grid;
+  }
+
+  function addExample(grid, caption, nodes, dark) {
+    var fig = el('figure', { class: 'example' });
+    var box = el('div', { class: 'example__box' + (dark ? ' example__box--dark' : '') });
+    (Array.isArray(nodes) ? nodes : [nodes]).forEach(function (n) { box.appendChild(n); });
+    var cap = el('figcaption');
+    cap.innerHTML = caption;
+    fig.appendChild(box);
+    fig.appendChild(cap);
+    grid.appendChild(fig);
+  }
+
+  /* ------------------------------------------------------------------
+     Tablas de tokens
+     ------------------------------------------------------------------ */
+  var INTENTS = ['primary', 'secondary', 'accent', 'subscription', 'error', 'info', 'success', 'warning', 'base', 'black', 'white'];
+
+  function buildIntents() {
+    var body = document.getElementById('table-intents');
+    INTENTS.forEach(function (name) {
+      var tr = el('tr');
+      tr.appendChild(el('th', { scope: 'row' }, name));
+      ['bg', 'bg', 'bg', 'bg', 'text', 'text', 'border'].forEach(function (layer, i) {
+        var suffix = ['default', 'light', 'lighten', 'foreground', 'default', 'foreground', 'default'][i];
+        var token = '--' + layer + '-' + name + '-' + suffix;
+        tr.appendChild(tokenCell(token));
+      });
+      body.appendChild(tr);
+    });
+  }
+
+  function buildNeutrals() {
+    var body = document.getElementById('table-neutrals');
+    var scale = ['1', '50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950', '999'];
+
+    function pairRow(tokens) {
+      var tr = el('tr');
+      tokens.forEach(function (token) {
+        if (!token) {
+          tr.appendChild(el('td'));
+          tr.appendChild(el('td'));
+          return;
+        }
+        tr.appendChild(tokenCell(token));
+        tr.appendChild(el('td')).appendChild(el('code', { 'data-token': token }, '…'));
+      });
+      return tr;
+    }
+
+    scale.forEach(function (step) {
+      body.appendChild(pairRow([
+        '--bg-neutral-' + step,
+        '--text-neutral-' + step,
+        '--border-neutral-' + step
+      ]));
+    });
+
+    var utils = [
+      ['--bg-muted', '--text-muted', '--border-muted'],
+      ['--bg-skeleton', '--text-skeleton', '--border-skeleton'],
+      ['--bg-neutral-1-60', '--bg-neutral-999-60', '--bg-neutral-1-15']
+    ];
+    utils.forEach(function (row) { body.appendChild(pairRow(row)); });
+  }
+
+  var TEXT_TOKENS = [
+    '--text-display-lg', '--text-display-md', '--text-display-sm',
+    '--text-heading-lg', '--text-heading-md', '--text-heading-sm',
+    '--text-subheading-lg', '--text-subheading-md', '--text-subheading-sm',
+    '--text-body-lg', '--text-body-md', '--text-body-sm',
+    '--text-label-lg', '--text-label-md', '--text-label-sm',
+    '--text-small-lg', '--text-small-md', '--text-small-sm'
+  ];
+
+  function buildType() {
+    var body = document.getElementById('table-type');
+    TEXT_TOKENS.forEach(function (token) {
+      var tr = el('tr');
+      tr.appendChild(el('th', { scope: 'row' }, token));
+      tr.appendChild(el('td', null, '')).appendChild(el('code', { 'data-token': token }, '…'));
+      body.appendChild(tr);
+      var sample = el('td');
+      var span = el('span', null, 'Aa — Receta deFoodit 123');
+      span.style.fontSize = 'var(' + token + ')';
+      span.style.lineHeight = '1.2'; /* TODO: token de line-height no definido en Figma */
+      sample.appendChild(span);
+      tr.appendChild(sample);
+    });
+  }
+
+  function buildFonts() {
+    var body = document.getElementById('table-fonts');
+    var rows = [
+      ['--font-primary', 'Títulos editoriales: font-family: var(--font-primary), serif'],
+      ['--font-secondary', 'UI: font-family: var(--font-secondary), sans-serif'],
+      ['--font-weight-bold', 'bold (Button, Chip, Badge, títulos)'],
+      ['--font-weight-semibold', 'pesos intermedios'],
+      ['--font-weight-normal', 'default']
+    ];
+    rows.forEach(function (r) {
+      var tr = el('tr');
+      tr.appendChild(el('th', { scope: 'row' }, r[0]));
+      tr.appendChild(el('td', null, '')).appendChild(el('code', { 'data-token': r[0] }, '…'));
+      tr.appendChild(el('td', null, r[1]));
+      body.appendChild(tr);
+    });
+  }
+
+  var P_TOKENS = ['--p-2', '--p-4', '--p-6', '--p-8', '--p-12', '--p-16', '--p-20', '--p-24', '--p-32', '--p-40', '--p-64', '--p-responsive'];
+  var GAP_TOKENS = ['--gap-2', '--gap-4', '--gap-8', '--gap-12', '--gap-16', '--gap-20', '--gap-24', '--gap-32', '--gap-40', '--gap-64', '--gap-responsive', '--gap-none'];
+  var SIZE_TOKENS = ['--size-4', '--size-8', '--size-12', '--size-14', '--size-16', '--size-20', '--size-24', '--size-32', '--size-40', '--size-48', '--size-56', '--size-64'];
+
+  function buildSpace() {
+    var body = document.getElementById('table-space');
+    var rows = Math.max(P_TOKENS.length, GAP_TOKENS.length, SIZE_TOKENS.length);
+    for (var i = 0; i < rows; i++) {
+      var tr = el('tr');
+      [[P_TOKENS, 0], [GAP_TOKENS, 1], [SIZE_TOKENS, 2]].forEach(function (pair) {
+        var list = pair[0];
+        if (i < list.length) {
+          tr.appendChild(el('th', { scope: 'row' }, list[i]));
+          tr.appendChild(el('td', null, '')).appendChild(el('code', { 'data-token': list[i] }, '…'));
+        } else {
+          tr.appendChild(el('td'));
+          tr.appendChild(el('td'));
+        }
+      });
+      body.appendChild(tr);
+    }
+  }
+
+  function buildRadius() {
+    var body = document.getElementById('table-radius');
+    var rows = [
+      ['--radius-sm', 'core-semantic (por marca)'],
+      ['--radius-md', 'core-semantic (por marca)'],
+      ['--radius-lg', 'core-semantic (por marca)'],
+      ['--radius-full', 'global-primitives (core lo referencia en --components-avatar-radius)'],
+      ['--components-button-radius', 'core-semantic · components'],
+      ['--components-button-weigth', 'core-semantic · components (borde outline)'],
+      ['--components-input-radius', 'core-semantic · components'],
+      ['--components-chip-radius', 'core-semantic · components'],
+      ['--components-Badge-radius', 'core-semantic · components'],
+      ['--components-alert-radius', 'core-semantic · components'],
+      ['--components-toast-radius', 'core-semantic · components'],
+      ['--border-sm', 'core-semantic (grosor de borde)'],
+      ['--border-2', 'global-primitives (borde de foco del Input)']
+    ];
+    rows.forEach(function (r) {
+      var tr = el('tr');
+      tr.appendChild(el('th', { scope: 'row' }, r[0]));
+      tr.appendChild(el('td', null, '')).appendChild(el('code', { 'data-token': r[0] }, '…'));
+      tr.appendChild(el('td', null, r[1]));
+      body.appendChild(tr);
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Resolución de valores (se re-ejecuta al cambiar de modo)
+     ------------------------------------------------------------------ */
+  function renderTokenValues() {
+    var values = css();
+    document.querySelectorAll('[data-token]').forEach(function (node) {
+      var name = node.getAttribute('data-token');
+      var value = values.getPropertyValue(name).trim();
+      node.textContent = value || 'no resuelto';
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Ejemplos: Button
+     ------------------------------------------------------------------ */
+  var BTN_COLORS = ['primary', 'secondary', 'accent', 'subscription', 'error', 'black', 'white'];
+  var BTN_VARIANTS = ['solid', 'outline', 'ghost'];
+  var BTN_SIZES = ['48', '40', '32'];
+  var BTN_STATES = ['default', 'hover', 'loading', 'disabled'];
+
+  function makeButton(opts) {
+    var b = el('button', {
+      class: 'ds-btn',
+      type: 'button',
+      'data-variant': opts.variant,
+      'data-color': opts.color,
+      'data-size': opts.size || '48'
+    });
+    if (opts.state) { b.setAttribute('data-state', opts.state); }
+    if (opts.state === 'loading') {
+      b.setAttribute('aria-busy', 'true');
+      var spin = el('span', { class: 'ds-btn__spinner', 'aria-hidden': 'true' });
+      spin.innerHTML = '<svg viewBox="0 0 24 24"><circle class="ds-spin-track" cx="12" cy="12" r="9" pathLength="100"/><circle class="ds-spin-head" cx="12" cy="12" r="9" pathLength="100"/></svg>';
+      b.appendChild(spin);
+    }
+    if (opts.onlyIcon) {
+      b.setAttribute('data-only-icon', '');
+      b.setAttribute('aria-label', opts.label);
+      var icon = el('span', { class: 'ds-btn__icon', 'aria-hidden': 'true' });
+      icon.innerHTML = ICON(opts.icon || 'star');
+      b.appendChild(icon);
+    } else {
+      if (opts.icon) {
+        var i = el('span', { class: 'ds-btn__icon', 'aria-hidden': 'true' });
+        i.innerHTML = ICON(opts.icon);
+        b.appendChild(i);
+      }
+      var label = el('span', { class: 'ds-btn__label' }, opts.label);
+      b.appendChild(label);
+      if (opts.iconEnd) {
+        var ie = el('span', { class: 'ds-btn__icon', 'aria-hidden': 'true' });
+        ie.innerHTML = ICON(opts.iconEnd);
+        b.appendChild(ie);
+      }
+    }
+    return b;
+  }
+
+  var ICONS = {
+    star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4l2.3 4.9 5.2.7-3.8 3.7.9 5.2L12 16l-4.5 2.5.9-5.2-3.8-3.7 5.2-.7z" stroke-linejoin="round"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 12.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>',
+    info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>',
+    warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4l9 16H3z" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke-linecap="round"/></svg>'
+  };
+  function ICON(name) { return ICONS[name] || ICONS.star; }
+
+  function buildButtonExamples() {
+    var box = document.getElementById('btn-examples');
+
+    var g1 = makeGroup(box, 'variant × color (size 48, state default)');
+    BTN_VARIANTS.forEach(function (variant) {
+      BTN_COLORS.forEach(function (color) {
+        addExample(g1,
+          '<code>data-variant="' + variant + '"</code> · <code>data-color="' + color + '"</code>',
+          makeButton({ variant: variant, color: color, size: '48', label: color }),
+          color === 'white');
+      });
+    });
+
+    var g2 = makeGroup(box, 'sizes (solid · primary)');
+    BTN_SIZES.forEach(function (size) {
+      addExample(g2, '<code>data-size="' + size + '"</code>',
+        makeButton({ variant: 'solid', color: 'primary', size: size, label: 'Botón ' + size }));
+    });
+
+    var g3 = makeGroup(box, 'íconos');
+    addExample(g3, 'ícono a izquierda · <code>data-size="40"</code>',
+      makeButton({ variant: 'solid', color: 'primary', size: '40', label: 'Guardar', icon: 'star' }));
+    addExample(g3, 'ícono a derecha · <code>data-size="40"</code>',
+      makeButton({ variant: 'outline', color: 'black', size: '40', label: 'Seguir', iconEnd: 'arrow' }));
+    addExample(g3, 'ambos íconos · <code>data-size="48"</code>',
+      makeButton({ variant: 'ghost', color: 'primary', size: '48', label: 'Ver más', icon: 'star', iconEnd: 'arrow' }));
+    BTN_SIZES.forEach(function (size) {
+      addExample(g3, 'isOnlyIcon · <code>data-only-icon</code> · <code>data-size="' + size + '"</code>',
+        makeButton({ variant: 'solid', color: 'primary', size: size, onlyIcon: true, label: 'Favorito', icon: 'star' }),
+        false);
+    });
+
+    var g4 = makeGroup(box, 'states (forzados con data-state; también aplican :hover, :disabled y aria-busy)');
+    BTN_VARIANTS.forEach(function (variant) {
+      BTN_STATES.forEach(function (state) {
+        addExample(g4,
+          '<code>data-variant="' + variant + '"</code> · <code>data-state="' + state + '"</code>',
+          makeButton({ variant: variant, color: 'primary', size: '40', state: state, label: state }),
+          false);
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Ejemplos: Input
+     ------------------------------------------------------------------ */
+  var fieldSeq = 0;
+
+  function makeField(opts) {
+    fieldSeq += 1;
+    var id = 'field-' + fieldSeq;
+    var field = el('div', {
+      class: 'ds-field' + (opts.cls ? ' ' + opts.cls : ''),
+      'data-label-type': opts.labelType || 'floating',
+      'data-color': opts.color || 'default',
+      'data-size': opts.size || '56'
+    });
+    if (opts.state) { field.setAttribute('data-state', opts.state); }
+    if (opts.labelClass) { field.classList.add(opts.labelClass); }
+
+    var control = el('div', { class: 'ds-field__control' });
+
+    if (opts.iconStart) {
+      var is = el('span', { class: 'ds-field__icon ds-field__icon--start', 'aria-hidden': 'true' });
+      is.innerHTML = ICONS.info;
+      control.appendChild(is);
+    }
+
+    var input = el('input', {
+      class: 'ds-field__input',
+      id: id,
+      type: opts.type || 'text',
+      placeholder: opts.placeholder || ' '
+    });
+    if (opts.value) { input.setAttribute('value', opts.value); }
+    if (opts.disabled) { input.setAttribute('disabled', ''); }
+    control.appendChild(input);
+
+    var label = el('label', { class: 'ds-field__label', 'for': id }, opts.label || 'Label');
+
+    if ((opts.labelType || 'floating') === 'floating') {
+      control.appendChild(label);
+    } else {
+      field.appendChild(label);
+    }
+
+    if (opts.iconEnd) {
+      var ie = el('span', { class: 'ds-field__icon ds-field__icon--end', 'aria-hidden': 'true' });
+      ie.innerHTML = ICONS.check;
+      control.appendChild(ie);
+    }
+
+    field.appendChild(control);
+
+    if (opts.supporting) {
+      var sup = el('p', { class: 'ds-field__supporting' });
+      if (opts.supportingIcon) {
+        var si = el('span', { class: 'ds-field__icon', 'aria-hidden': 'true' });
+        si.innerHTML = opts.color === 'error' ? ICONS.warn : ICONS.info;
+        sup.appendChild(si);
+      }
+      sup.appendChild(el('span', null, opts.supporting));
+      field.appendChild(sup);
+    }
+
+    return field;
+  }
+
+  function buildInputExamples() {
+    var box = document.getElementById('input-examples');
+
+    var g1 = makeGroup(box, 'labelType × color (size 56)');
+    ['floating', 'fixed'].forEach(function (lt) {
+      ['default', 'gray', 'error'].forEach(function (color) {
+        addExample(g1,
+          '<code>data-label-type="' + lt + '"</code> · <code>data-color="' + color + '"</code>',
+          makeField({
+            labelType: lt,
+            color: color,
+            size: '56',
+            label: color === 'error' ? 'Email con error' : 'Email',
+            placeholder: 'tu@email.com',
+            supporting: color === 'error' ? 'Ingresá un email válido' : 'Texto de apoyo',
+            supportingIcon: true
+          }));
+      });
+    });
+
+    var g2 = makeGroup(box, 'sizes (floating · default)');
+    ['56', '48'].forEach(function (size) {
+      addExample(g2, '<code>data-size="' + size + '"</code>',
+        makeField({ labelType: 'floating', color: 'default', size: size, label: 'Buscar', placeholder: 'Ej: risotto' }));
+    });
+
+    var g3 = makeGroup(box, 'íconos con separador (floating · default · 56)');
+    addExample(g3, 'ícono a izquierda · <code>.ds-field__icon--start</code>',
+      makeField({ labelType: 'floating', color: 'default', size: '56', label: 'Buscar', placeholder: 'Ej: risotto', iconStart: true }));
+    addExample(g3, 'ícono a derecha · <code>.ds-field__icon--end</code>',
+      makeField({ labelType: 'floating', color: 'default', size: '56', label: 'Contraseña', placeholder: '••••••••', type: 'password', iconEnd: true }));
+    addExample(g3, 'ambos íconos',
+      makeField({ labelType: 'fixed', color: 'gray', size: '48', label: 'Código', placeholder: 'ARN-000', iconStart: true, iconEnd: true }));
+
+    var g4 = makeGroup(box, 'states (forzados con .is-hover / .is-focus / data-state; reales: :hover, :focus-within, :disabled)');
+    addExample(g4, 'enabled', makeField({ labelType: 'floating', color: 'default', size: '48', label: 'Estado', placeholder: 'Habilitado' }));
+    addExample(g4, '<code>class="is-hover"</code>', makeField({ labelType: 'floating', color: 'default', size: '48', label: 'Estado', placeholder: 'Hover', cls: 'is-hover' }));
+    addExample(g4, '<code>class="is-focus"</code>', makeField({ labelType: 'floating', color: 'default', size: '48', label: 'Estado', placeholder: 'Focus', cls: 'is-focus' }));
+    addExample(g4, '<code>data-state="disabled"</code>', makeField({ labelType: 'floating', color: 'default', size: '48', label: 'Estado', placeholder: 'Deshabilitado', state: 'disabled', disabled: true }));
+    addExample(g4, 'error · <code>is-focus</code>', makeField({ labelType: 'floating', color: 'error', size: '48', label: 'Estado', placeholder: 'Error', cls: 'is-focus', supporting: 'Ingresá un email válido', supportingIcon: true }));
+    addExample(g4, 'con valor · label flotado', makeField({ labelType: 'floating', color: 'default', size: '48', label: 'Estado', value: 'Con valor escrito' }));
+  }
+
+  /* ------------------------------------------------------------------
+     Ejemplos: Chip
+     ------------------------------------------------------------------ */
+  var CHIP_COLORS = ['primary', 'secondary', 'accent', 'error', 'black', 'white'];
+  var CHIP_VARIANTS = ['solid', 'outline', 'ghost'];
+  var CHIP_SIZES = ['30', '24'];
+  var CHIP_TYPES = ['informative', 'clickable', 'closable'];
+  var CHIP_STATES = ['default', 'hover', 'disabled'];
+
+  function makeChip(opts) {
+    var tag = opts.type === 'informative' ? 'span' : 'button';
+    var chip = el(tag, {
+      class: 'ds-chip',
+      'data-type': opts.type,
+      'data-variant': opts.variant,
+      'data-color': opts.color,
+      'data-size': opts.size || '30'
+    });
+    if (tag === 'button') { chip.setAttribute('type', 'button'); }
+    if (opts.state) { chip.setAttribute('data-state', opts.state); }
+
+    if (opts.icon) {
+      var icon = el('span', { class: 'ds-chip__icon', 'aria-hidden': 'true' });
+      icon.innerHTML = ICONS.star;
+      chip.appendChild(icon);
+    }
+    chip.appendChild(el('span', { class: 'ds-chip__label' }, opts.label));
+
+    if (opts.type === 'closable') {
+      var close = el('span', { class: 'ds-chip__close', 'aria-hidden': 'true' });
+      close.innerHTML = ICONS.close;
+      chip.appendChild(close);
+    }
+    return chip;
+  }
+
+  function buildChipExamples() {
+    var box = document.getElementById('chip-examples');
+
+    var g1 = makeGroup(box, 'type (solid · primary · 30)');
+    CHIP_TYPES.forEach(function (type) {
+      addExample(g1, '<code>data-type="' + type + '"</code>',
+        makeChip({ type: type, variant: 'solid', color: 'primary', size: '30', label: type }));
+    });
+    addExample(g1, 'informative + ícono',
+      makeChip({ type: 'informative', variant: 'outline', color: 'primary', size: '30', label: 'Con ícono', icon: true }));
+
+    var g2 = makeGroup(box, 'variant × color (clickable · size 30)');
+    CHIP_VARIANTS.forEach(function (variant) {
+      CHIP_COLORS.forEach(function (color) {
+        addExample(g2,
+          '<code>data-variant="' + variant + '"</code> · <code>data-color="' + color + '"</code>',
+          makeChip({ type: 'clickable', variant: variant, color: color, size: '30', label: color }),
+          color === 'white');
+      });
+    });
+
+    var g3 = makeGroup(box, 'sizes (solid · primary)');
+    CHIP_SIZES.forEach(function (size) {
+      addExample(g3, '<code>data-size="' + size + '"</code>',
+        makeChip({ type: 'clickable', variant: 'solid', color: 'primary', size: size, label: 'Tamaño ' + size }));
+    });
+
+    var g4 = makeGroup(box, 'states de clickable (informative solo tiene default)');
+    CHIP_VARIANTS.forEach(function (variant) {
+      CHIP_STATES.forEach(function (state) {
+        addExample(g4,
+          '<code>data-variant="' + variant + '"</code> · <code>data-state="' + state + '"</code>',
+          makeChip({ type: 'clickable', variant: variant, color: 'primary', size: '30', state: state, label: state }));
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Ejemplos: Badge
+     ------------------------------------------------------------------ */
+  var BADGE_COLORS = ['primary', 'secondary', 'accent', 'subscription', 'error', 'black', 'white'];
+  var BADGE_VARIANTS = ['solid', 'outline'];
+  var BADGE_SIZES = ['lg', 'md', 'sm'];
+
+  function makeBadge(opts) {
+    var b = el('span', {
+      class: 'ds-badge',
+      'data-variant': opts.variant,
+      'data-color': opts.color,
+      'data-size': opts.size || 'lg'
+    });
+    if (opts.onImage) { b.setAttribute('data-on-image', opts.onImage); }
+    b.textContent = opts.label;
+    return b;
+  }
+
+  function buildBadgeExamples() {
+    var box = document.getElementById('badge-examples');
+
+    var g1 = makeGroup(box, 'variant × color (size lg)');
+    BADGE_VARIANTS.forEach(function (variant) {
+      BADGE_COLORS.forEach(function (color) {
+        addExample(g1,
+          '<code>data-variant="' + variant + '"</code> · <code>data-color="' + color + '"</code>',
+          makeBadge({ variant: variant, color: color, size: 'lg', label: color }),
+          color === 'white');
+      });
+    });
+
+    var g2 = makeGroup(box, 'sizes (solid · primary)');
+    BADGE_SIZES.forEach(function (size) {
+      addExample(g2, '<code>data-size="' + size + '"</code>',
+        makeBadge({ variant: 'solid', color: 'primary', size: size, label: 'Tamaño ' + size }));
+    });
+
+    var g3 = makeGroup(box, 'sobre imagen (data-on-image)');
+    ['light', 'dark'].forEach(function (mode) {
+      var wrap = el('div');
+      wrap.style.backgroundColor = mode === 'light' ? 'var(--bg-skeleton)' : 'var(--bg-neutral-999)';
+      wrap.style.padding = 'var(--p-16)';
+      wrap.style.borderRadius = 'var(--radius-sm)';
+      wrap.style.display = 'flex';
+      wrap.style.gap = 'var(--gap-8)';
+      wrap.appendChild(makeBadge({ variant: 'solid', color: 'white', size: 'md', onImage: mode, label: 'Nuevo' }));
+      wrap.appendChild(makeBadge({ variant: 'solid', color: 'black', size: 'md', onImage: mode, label: 'Fresco' }));
+      addExample(g3, '<code>data-on-image="' + mode + '"</code>', wrap);
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Ejemplos: Alert / Toast
+     ------------------------------------------------------------------ */
+  var ALERT_TYPES = ['success', 'info', 'warning', 'error'];
+  var ALERT_STYLES = ['light', 'solid'];
+  var TITLES = { success: '¡Listo!', info: 'Información', warning: '¡Atención!', error: '¡Uppps!' };
+  var GLYPHS = { success: 'check', info: 'info', warning: 'warn', error: 'close' };
+  var DESCS = {
+    success: 'La receta se guardó en tu libreta de cocina.',
+    info: 'Tenés 3 reseñas nuevas para esta receta.',
+    warning: 'Los tiempos varían según el tipo de arroz.',
+    error: 'No pudimos cargar los comentarios. Revisá tu conexión.'
+  };
+
+  function makeAlert(kind, type, style) {
+    var node = el('div', {
+      class: kind === 'alert' ? 'ds-alert' : 'ds-toast',
+      'data-type': type,
+      'data-style': style || 'light'
+    });
+    if (type === 'skeleton') {
+      node.setAttribute('aria-hidden', 'true');
+      node.appendChild(el('span', { class: (kind === 'alert' ? 'ds-alert' : 'ds-toast') + '__icon' }));
+      var bodyS = el('div', { class: (kind === 'alert' ? 'ds-alert' : 'ds-toast') + '__body' });
+      bodyS.appendChild(el('p', { class: (kind === 'alert' ? 'ds-alert' : 'ds-toast') + '__title' }));
+      bodyS.appendChild(el('p', { class: (kind === 'alert' ? 'ds-alert' : 'ds-toast') + '__desc' }));
+      node.appendChild(bodyS);
+      return node;
+    }
+
+    var prefix = kind === 'alert' ? 'ds-alert' : 'ds-toast';
+    var icon = el('span', { class: prefix + '__icon', 'aria-hidden': 'true' });
+    icon.innerHTML = ICON(GLYPHS[type]);
+    node.appendChild(icon);
+
+    var body = el('div', { class: prefix + '__body' });
+    body.appendChild(el('p', { class: prefix + '__title' }, TITLES[type]));
+    body.appendChild(el('p', { class: prefix + '__desc' }, DESCS[type]));
+
+    if (kind === 'alert' && type === 'error' && style === 'light') {
+      var slot = el('div', { class: 'ds-alert__slot' });
+      slot.appendChild(makeButton({ variant: 'solid', color: 'error', size: '32', label: 'Reintentar' }));
+      slot.appendChild(makeButton({ variant: 'ghost', color: 'error', size: '32', label: 'Cerrar' }));
+      body.appendChild(slot);
+    }
+
+    node.appendChild(body);
+    return node;
+  }
+
+  function buildAlertExamples() {
+    var box = document.getElementById('alert-examples');
+
+    var g1 = makeGroup(box, 'type × style');
+    ALERT_STYLES.forEach(function (style) {
+      ALERT_TYPES.forEach(function (type) {
+        addExample(g1,
+          '<code>data-type="' + type + '"</code> · <code>data-style="' + style + '"</code>',
+          makeAlert('alert', type, style));
+      });
+    });
+
+    var g2 = makeGroup(box, 'skeleton');
+    addExample(g2, '<code>data-type="skeleton"</code>', makeAlert('alert', 'skeleton', 'light'));
+
+    var g3 = makeGroup(box, 'slot opcional (acciones dentro de la alert)');
+    addExample(g3, '<code>.ds-alert__slot</code> · error light',
+      makeAlert('alert', 'error', 'light'));
+  }
+
+  function buildToastExamples() {
+    var box = document.getElementById('toast-examples');
+    var g1 = makeGroup(box, 'type × style');
+    ALERT_STYLES.forEach(function (style) {
+      ALERT_TYPES.forEach(function (type) {
+        addExample(g1,
+          '<code>data-type="' + type + '"</code> · <code>data-style="' + style + '"</code>',
+          makeAlert('toast', type, style));
+      });
+    });
+    addExample(g1, '<code>data-type="skeleton"</code>', makeAlert('toast', 'skeleton', 'light'));
+  }
+
+  /* ------------------------------------------------------------------
+     Ejemplos: Card
+     ------------------------------------------------------------------ */
+  function buildCardExamples() {
+    var box = document.getElementById('card-examples');
+    var g1 = makeGroup(box, 'default');
+
+    function card(title, text, badgeLabel) {
+      var c = el('article', { class: 'ds-card' });
+      var media = el('div', { class: 'ds-card__media', role: 'img', 'aria-label': 'Placeholder de imagen' });
+      c.appendChild(media);
+      var body = el('div', { class: 'ds-card__body' });
+      body.appendChild(el('p', { class: 'ds-card__title' }, title));
+      body.appendChild(el('p', { class: 'ds-card__text' }, text));
+      if (badgeLabel) {
+        var p = el('p');
+        p.appendChild(makeBadge({ variant: 'solid', color: 'primary', size: 'sm', label: badgeLabel }));
+        body.appendChild(p);
+      }
+      c.appendChild(body);
+      return c;
+    }
+
+    addExample(g1, '<code>.ds-card</code>', card('Ñoquis de papa al sugo', 'Clásico de domingo: ñoquis caseros con salsa de tomate y albahaca.', '45 min'));
+    addExample(g1, '<code>.ds-card</code> con badge', card('Ensalada de rúcula', 'Rúcula, parmesano, nueces y vinagreta de limón.', 'Vegetariana'));
+  }
+
+  /* ------------------------------------------------------------------
+     Init
+     ------------------------------------------------------------------ */
+  buildIntents();
+  buildNeutrals();
+  buildType();
+  buildFonts();
+  buildSpace();
+  buildRadius();
+
+  buildButtonExamples();
+  buildInputExamples();
+  buildChipExamples();
+  buildBadgeExamples();
+  buildAlertExamples();
+  buildToastExamples();
+  buildCardExamples();
+
+  renderTokenValues();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+/* ==========================================================================
+   Design System La Nación — Global / [BASE] Primitive
+   Fuente: export de variables de Figma (colección "[BASE] Primitive", Mode 1).
+   273 tokens. Generado desde export.json: no editar a mano.
+   Nomenclatura: ruta de Figma con "/" reemplazado por "-".
+     color/neutral/800  ->  --color-neutral-800
+   Unidades: px en medidas; opacity convertida de 0–100 a 0–1.
+   ========================================================================== */
+
+:root {
+
+  /* ---------- Color ---------- */
+  --color-neutral-1: #fefefe;
+  --color-neutral-50: #f2f2f2;
+  --color-neutral-100: #e5e5e5;
+  --color-neutral-200: #cccccc;
+  --color-neutral-300: #b2b2b2;
+  --color-neutral-400: #999999;
+  --color-neutral-500: #7f7f7f;
+  --color-neutral-600: #666666;
+  --color-neutral-700: #4c4c4c;
+  --color-neutral-800: #333333;
+  --color-neutral-900: #191919;
+  --color-neutral-950: #0c0c0c;
+  --color-neutral-999: #010101;
+  --color-navy-50: #f3f6f9;
+  --color-navy-100: #e2e9f1;
+  --color-navy-200: #d0dbe9;
+  --color-navy-300: #aec1d8;
+  --color-navy-400: #8ca7c7;
+  --color-navy-500: #698db7;
+  --color-navy-600: #4d73a0;
+  --color-navy-700: #3c5a7e;
+  --color-navy-800: #2c425b;
+  --color-navy-900: #1b2939;
+  --color-navy-950: #131c27;
+  --color-green-50: #edfff9;
+  --color-green-100: #d3fff0;
+  --color-green-200: #a0ffdf;
+  --color-green-300: #6dffcd;
+  --color-green-400: #3affbc;
+  --color-green-500: #07ffab;
+  --color-green-600: #00d38b;
+  --color-green-700: #00a06a;
+  --color-green-800: #006d48;
+  --color-green-900: #003a27;
+  --color-green-950: #002116;
+  --color-yellow-50: #fffbed;
+  --color-yellow-100: #fff4d4;
+  --color-yellow-200: #ffe7a1;
+  --color-yellow-300: #ffdb6e;
+  --color-yellow-400: #ffce3b;
+  --color-yellow-500: #ffc108;
+  --color-yellow-600: #d49f00;
+  --color-yellow-700: #a17900;
+  --color-yellow-800: #6e5200;
+  --color-yellow-900: #3b2c00;
+  --color-yellow-950: #211900;
+  --color-red-50: #fefbfb;
+  --color-red-100: #fbe5e6;
+  --color-red-200: #f5b8bb;
+  --color-red-300: #ef8b91;
+  --color-red-400: #e95e66;
+  --color-red-500: #e3313b;
+  --color-red-600: #c61b25;
+  --color-red-700: #99151d;
+  --color-red-800: #6c0f14;
+  --color-red-900: #3f090c;
+  --color-red-950: #290608;
+
+  /* ---------- Font weight ---------- */
+  /* Las variantes italic comparten peso; aplicar font-style: italic aparte. */
+  --font-weight-thin: 100; /* Thin */
+  --font-weight-thin-italic: 100; /* Thin Italic */
+  --font-weight-extralight: 200; /* ExtraLight */
+  --font-weight-extralight-italic: 200; /* ExtraLight Italic */
+  --font-weight-light: 300; /* Light */
+  --font-weight-light-italic: 300; /* Light Italic */
+  --font-weight-normal: 400; /* Regular */
+  --font-weight-italic: 400; /* Italic: sin peso definido en Figma, se asume 400 */
+  --font-weight-medium: 500; /* Medium */
+  --font-weight-medium-italic: 500; /* Medium Italic */
+  --font-weight-semibold: 600; /* SemiBold */
+  --font-weight-semibold-italic: 600; /* SemiBold Italic */
+  --font-weight-bold: 700; /* Bold */
+  --font-weight-bold-italic: 700; /* Bold Italic */
+  --font-weight-extrabold: 800; /* Extrabold */
+  --font-weight-extrabold-italic: 800; /* Extrabold Italic */
+  --font-weight-black: 900; /* Black */
+  --font-weight-black-italic: 900; /* Black Italic */
+
+  /* ---------- Font size ---------- */
+  --text-4: 4px;
+  --text-6: 6px;
+  --text-8: 8px;
+  --text-10: 10px;
+  --text-12: 12px;
+  --text-14: 14px;
+  --text-16: 16px;
+  --text-18: 18px;
+  --text-20: 20px;
+  --text-24: 24px;
+  --text-28: 28px;
+  --text-32: 32px;
+  --text-36: 36px;
+  --text-40: 40px;
+  --text-44: 44px;
+  --text-48: 48px;
+  --text-52: 52px;
+  --text-56: 56px;
+  --text-60: 60px;
+  --text-64: 64px;
+  --text-72: 72px;
+  --text-80: 80px;
+  --text-96: 96px;
+  --text-112: 112px;
+  --text-128: 128px;
+
+  /* ---------- Letter spacing ---------- */
+  --tracking-tightest: -3px;
+  --tracking-tighter: -2px;
+  --tracking-tight: -1px;
+  --tracking-normal: 0px;
+  --tracking-wide: 1px;
+  --tracking-wider: 2px;
+  --tracking-widest: 3px;
+
+  /* ---------- Line height ---------- */
+  --leading-4: 4px;
+  --leading-6: 6px;
+  --leading-8: 8px;
+  --leading-10: 10px;
+  --leading-12: 12px;
+  --leading-14: 14px;
+  --leading-16: 16px;
+  --leading-18: 18px;
+  --leading-20: 20px;
+  --leading-24: 24px;
+  --leading-28: 28px;
+  --leading-32: 32px;
+  --leading-36: 36px;
+  --leading-40: 40px;
+  --leading-44: 44px;
+  --leading-48: 48px;
+  --leading-52: 52px;
+  --leading-56: 56px;
+  --leading-60: 60px;
+  --leading-64: 64px;
+  --leading-72: 72px;
+  --leading-80: 80px;
+  --leading-96: 96px;
+  --leading-112: 112px;
+  --leading-128: 128px;
+
+  /* ---------- Size ---------- */
+  --size-0: 0px;
+  --size-1: 1px;
+  --size-2: 2px;
+  --size-3: 3px;
+  --size-4: 4px;
+  --size-6: 6px;
+  --size-8: 8px;
+  --size-10: 10px;
+  --size-12: 12px;
+  --size-14: 14px;
+  --size-16: 16px;
+  --size-20: 20px;
+  --size-24: 24px;
+  --size-28: 28px;
+  --size-32: 32px;
+  --size-36: 36px;
+  --size-40: 40px;
+  --size-44: 44px;
+  --size-48: 48px;
+  --size-52: 52px;
+  --size-56: 56px;
+  --size-60: 60px;
+  --size-64: 64px;
+  --size-68: 68px;
+  --size-72: 72px;
+  --size-74: 74px;
+  --size-80: 80px;
+  --size-96: 96px;
+  --size-112: 112px;
+  --size-128: 128px;
+  --size-144: 144px;
+  --size-160: 160px;
+  --size-176: 176px;
+  --size-192: 192px;
+  --size-208: 208px;
+  --size-224: 224px;
+  --size-240: 240px;
+  --size-256: 256px;
+  --size-288: 288px;
+  --size-320: 320px;
+  --size-352: 352px;
+  --size-384: 384px;
+  --size-416: 416px;
+
+  /* ---------- Gap ---------- */
+  --gap-2: 2px;
+  --gap-4: 4px;
+  --gap-8: 8px;
+  --gap-12: 12px;
+  --gap-16: 16px;
+  --gap-20: 20px;
+  --gap-24: 24px;
+  --gap-32: 32px;
+  --gap-40: 40px;
+  --gap-64: 64px;
+  --gap-80: 80px;
+  --gap-128: 128px;
+  --gap-none: 0px;
+
+  /* ---------- Padding ---------- */
+  --p-2: 2px;
+  --p-4: 4px;
+  --p-6: 6px;
+  --p-8: 8px;
+  --p-10: 10px;
+  --p-12: 12px;
+  --p-14: 14px;
+  --p-16: 16px;
+  --p-18: 18px;
+  --p-20: 20px;
+  --p-22: 22px;
+  --p-24: 24px;
+  --p-28: 28px;
+  --p-32: 32px;
+  --p-40: 40px;
+  --p-64: 64px;
+  --p-72: 72px;
+  --p-112: 112px;
+  --p-128: 128px;
+  --p-160: 160px;
+  --p-none: 0px;
+
+  /* ---------- Border radius ---------- */
+  --radius-2: 2px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+  --radius-40: 40px;
+  --radius-none: 0px;
+  --radius-full: 9999px;
+
+  /* ---------- Border width ---------- */
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-4: 4px;
+  --border-8: 8px;
+  --border-12: 12px;
+  --border-16: 16px;
+  --border-24: 24px;
+  --border-32: 32px;
+  --border-none: 0px;
+
+  /* ---------- Opacity ---------- */
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-15: 0.15;
+  --opacity-20: 0.2;
+  --opacity-25: 0.25;
+  --opacity-30: 0.3;
+  --opacity-35: 0.35;
+  --opacity-40: 0.4;
+  --opacity-45: 0.45;
+  --opacity-50: 0.5;
+  --opacity-55: 0.55;
+  --opacity-60: 0.6;
+  --opacity-65: 0.65;
+  --opacity-70: 0.7;
+  --opacity-75: 0.75;
+  --opacity-80: 0.8;
+  --opacity-85: 0.85;
+  --opacity-90: 0.9;
+  --opacity-95: 0.95;
+  --opacity-100: 1;
+
+  /* ---------- Blur (oculto en publicación en Figma) ---------- */
+  --blur-none: 0px;
+  --blur-xs: 4px;
+  --blur-sm: 8px;
+  --blur-md: 12px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
+  --blur-2xl: 40px;
+  --blur-3xl: 64px;
+
+  /* ---------- Breakpoints ---------- */
+  /* Las variables CSS no funcionan dentro de @media: valores de referencia. */
+  --breakpoint-web-max-sm: 511px;
+  --breakpoint-web-sm: 512px;
+  --breakpoint-web-max-md: 767px;
+  --breakpoint-web-md: 768px;
+  --breakpoint-web-max-lg: 1023px;
+  --breakpoint-web-lg: 1024px;
+  --breakpoint-web-max-xl: 1279px;
+  --breakpoint-web-xl: 1280px;
+  --breakpoint-web-2xl: 1366px;
+  --breakpoint-web-3xl: 1920px;
+  --breakpoint-android-mobile: 360px;
+  --breakpoint-android-tablet: 600px;
+  --breakpoint-ios-mobile: 375px;
+  --breakpoint-ios-tablet: 1024px;
+}

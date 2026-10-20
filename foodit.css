@@ -1,0 +1,603 @@
+/* ==========================================================================
+   Foundations Foodit — generado desde export de Figma. No editar a mano.
+   Colecciones:
+     [FOO] Primitive      -> --foo-primitive-*
+     [FOO] Semantic MODE  -> --foo-mode-*   (Light por defecto; Dark con <html data-mode="dark">)
+     [FOO] Semantic       -> --foo-*
+     [FOO] Layout WEB     -> --foo-*        (por breakpoint)
+   Los atributos data-brand / data-mode van siempre en <html>.
+   ========================================================================== */
+
+/* ---------- [FOO] Layout WEB ---------- */
+@media (min-width: 1280px) { /* 🖥 > 1280 */
+  :root {
+    --foo-text-display-lg: var(--text-64);
+    --foo-text-display-md: var(--text-60);
+    --foo-text-display-sm: var(--text-56);
+    --foo-text-heading-lg: var(--text-48);
+    --foo-text-heading-md: var(--text-36);
+    --foo-text-heading-sm: var(--text-32);
+    --foo-text-subheading-lg: var(--text-28);
+    --foo-text-subheading-md: var(--text-24);
+    --foo-text-subheading-sm: var(--text-20);
+    --foo-text-body-lg: var(--text-18);
+    --foo-text-body-md: var(--text-16);
+    --foo-text-body-sm: var(--text-14);
+    --foo-text-label-lg: var(--text-16);
+    --foo-text-label-md: var(--text-14);
+    --foo-text-label-sm: var(--text-12);
+    --foo-text-small-lg: var(--text-12);
+    --foo-text-small-md: var(--text-10);
+    --foo-text-small-sm: var(--text-8);
+    --foo-text-custom-heading-sm-id: 0px;
+    --foo-gap-responsive: var(--gap-32);
+    --foo-p-responsive: var(--p-32);
+    --foo-min-width: var(--breakpoint-web-xl);
+    --foo-max-width: var(--breakpoint-web-3xl);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) { /* 🍫 768 a 1279 */
+  :root {
+    --foo-text-display-lg: var(--text-40);
+    --foo-text-display-md: var(--text-40);
+    --foo-text-display-sm: var(--text-40);
+    --foo-text-heading-lg: var(--text-40);
+    --foo-text-heading-md: var(--text-32);
+    --foo-text-heading-sm: var(--text-28);
+    --foo-text-subheading-lg: var(--text-28);
+    --foo-text-subheading-md: var(--text-24);
+    --foo-text-subheading-sm: var(--text-20);
+    --foo-text-body-lg: var(--text-18);
+    --foo-text-body-md: var(--text-16);
+    --foo-text-body-sm: var(--text-14);
+    --foo-text-label-lg: var(--text-16);
+    --foo-text-label-md: var(--text-14);
+    --foo-text-label-sm: var(--text-12);
+    --foo-text-small-lg: var(--text-12);
+    --foo-text-small-md: var(--text-10);
+    --foo-text-small-sm: var(--text-8);
+    --foo-text-custom-heading-sm-id: 0px;
+    --foo-gap-responsive: var(--gap-24);
+    --foo-p-responsive: var(--p-24);
+    --foo-min-width: var(--breakpoint-web-md);
+    --foo-max-width: var(--breakpoint-web-max-xl);
+  }
+}
+
+@media (max-width: 767px) { /* 📱 < 767 */
+  :root {
+    --foo-text-display-lg: var(--text-32);
+    --foo-text-display-md: var(--text-32);
+    --foo-text-display-sm: var(--text-32);
+    --foo-text-heading-lg: var(--text-28);
+    --foo-text-heading-md: var(--text-24);
+    --foo-text-heading-sm: var(--text-24);
+    --foo-text-subheading-lg: var(--text-24);
+    --foo-text-subheading-md: var(--text-24);
+    --foo-text-subheading-sm: var(--text-20);
+    --foo-text-body-lg: var(--text-18);
+    --foo-text-body-md: var(--text-16);
+    --foo-text-body-sm: var(--text-14);
+    --foo-text-label-lg: var(--text-16);
+    --foo-text-label-md: var(--text-14);
+    --foo-text-label-sm: var(--text-12);
+    --foo-text-small-lg: var(--text-12);
+    --foo-text-small-md: var(--text-10);
+    --foo-text-small-sm: var(--text-8);
+    --foo-text-custom-heading-sm-id: 0px;
+    --foo-gap-responsive: var(--gap-16);
+    --foo-p-responsive: var(--p-16);
+    --foo-min-width: 360px;
+    --foo-max-width: var(--breakpoint-web-max-md);
+  }
+}
+
+/* ---------- [FOO] Primitive — modo Value ---------- */
+:root {
+  /* color */
+  --foo-primitive-color-primary-default: #333333;
+  --foo-primitive-color-primary-dark: #0d0d0d;
+  --foo-primitive-color-primary-light: #787932;
+  --foo-primitive-color-primary-lighten: #cccccc;
+  --foo-primitive-color-primary-foreground: #fefefe;
+  --foo-primitive-color-secondary-default: #666666;
+  --foo-primitive-color-secondary-dark: #404040;
+  --foo-primitive-color-secondary-light: #8c8c8c;
+  --foo-primitive-color-secondary-lighten: #b3b3b3;
+  --foo-primitive-color-secondary-foreground: #fefefe;
+  --foo-primitive-color-subscription-default: #fcc846;
+  --foo-primitive-color-subscription-dark: #f2ae04;
+  --foo-primitive-color-subscription-light: #787932;
+  --foo-primitive-color-subscription-lighten: #fef5dd;
+  --foo-primitive-color-subscription-foreground: #333333;
+  --foo-primitive-color-accent-default: #846b05;
+  --foo-primitive-color-accent-dark: #3a2f02;
+  --foo-primitive-color-accent-light: #787932;
+  --foo-primitive-color-accent-lighten: #cdc39a;
+  --foo-primitive-color-accent-foreground: #fefefe;
+  --foo-primitive-color-brand-lechuga: #787932; /* Se utiliza en el hover desktop */
+  --foo-primitive-color-brand-maiz: #f4ca5f;
+  --foo-primitive-color-brand-rucula: #143318;
+  --foo-primitive-color-brand-vino: #930048;
+  --foo-primitive-color-brand-tomate: #a92c2c;
+  --foo-primitive-color-brand-mandarina: #f65a22;
+  --foo-primitive-color-brand-sal: #f3f0eb;
+  --foo-primitive-color-info-default: #715e11;
+  --foo-primitive-color-info-dark: #2f2707;
+  --foo-primitive-color-info-light: #b3951b;
+  --foo-primitive-color-info-lighten: #e8ce66;
+  --foo-primitive-color-info-foreground: #fefefe;
+  --foo-primitive-color-success-default: #215327;
+  --foo-primitive-color-success-dark: #143318;
+  --foo-primitive-color-success-light: #378a41;
+  --foo-primitive-color-success-lighten: #77c981;
+  --foo-primitive-color-success-foreground: #fefefe;
+  --foo-primitive-color-warning-default: #f4ca5f;
+  --foo-primitive-color-warning-dark: #dea40f;
+  --foo-primitive-color-warning-light: #f9e2a7;
+  --foo-primitive-color-warning-lighten: #fbeabe;
+  --foo-primitive-color-warning-foreground: #010101;
+  --foo-primitive-color-error-default: #a92c2c;
+  --foo-primitive-color-error-dark: #300c0c;
+  --foo-primitive-color-error-light: #d15050;
+  --foo-primitive-color-error-lighten: #ecb5b5;
+  --foo-primitive-color-error-foreground: #fefefe;
+  --foo-primitive-color-base-default: #333333;
+  --foo-primitive-color-base-dark: #191919;
+  --foo-primitive-color-base-light: #787932;
+  --foo-primitive-color-base-lighten: #cccccc;
+  --foo-primitive-color-base-foreground: #fefefe;
+  /* font */
+  --foo-primitive-font-primary: "Prumo";
+  --foo-primitive-font-secondary: "Roboto";
+}
+
+/* ---------- [FOO] Semantic — modo Value ---------- */
+:root {
+  /* text */
+  --foo-text-muted: var(--foo-mode-color-muted);
+  --foo-text-skeleton: var(--foo-mode-color-skeleton);
+  --foo-text-primary-default: var(--foo-mode-color-primary-default); /* CTAs principales, íconos destacados */
+  --foo-text-primary-default-60: var(--foo-mode-color-primary-default-60);
+  --foo-text-primary-dark: var(--foo-mode-color-primary-dark);
+  --foo-text-primary-light: var(--foo-mode-color-primary-light);
+  --foo-text-primary-lighten: var(--foo-mode-color-primary-lighten);
+  --foo-text-primary-foreground: var(--foo-mode-color-primary-foreground);
+  --foo-text-secondary-default: var(--foo-mode-color-secondary-default); /* Acciones o textos secundarios o menos prioritarios */
+  --foo-text-secondary-default-60: var(--foo-mode-color-secondary-default-60);
+  --foo-text-secondary-dark: var(--foo-mode-color-secondary-dark);
+  --foo-text-secondary-light: var(--foo-primitive-color-secondary-light);
+  --foo-text-secondary-lighten: var(--foo-mode-color-secondary-lighten);
+  --foo-text-secondary-foreground: var(--foo-mode-color-secondary-foreground);
+  --foo-text-subscription-default: var(--foo-mode-color-subscription-default); /* CTA de suscripción */
+  --foo-text-subscription-default-60: var(--foo-mode-color-subscription-default-60);
+  --foo-text-subscription-dark: var(--foo-mode-color-subscription-dark);
+  --foo-text-subscription-light: var(--foo-mode-color-subscription-light);
+  --foo-text-subscription-lighten: var(--foo-mode-color-subscription-lighten);
+  --foo-text-subscription-foreground: var(--foo-mode-color-subscription-foreground);
+  --foo-text-accent-default: var(--foo-mode-color-accent-default); /* Se usa en links, tags, avatars, indicadores, etc */
+  --foo-text-accent-default-60: var(--foo-mode-color-accent-default-60);
+  --foo-text-accent-dark: var(--foo-mode-color-accent-dark);
+  --foo-text-accent-light: var(--foo-mode-color-accent-light);
+  --foo-text-accent-lighten: var(--foo-mode-color-accent-lighten);
+  --foo-text-accent-foreground: var(--foo-mode-color-accent-foreground);
+  --foo-text-brand-lechuga: var(--foo-mode-color-brand-lechuga); /* colores de la marca para acentuar o resaltar elementos */
+  --foo-text-brand-maiz: var(--foo-mode-color-brand-maiz);
+  --foo-text-brand-rucula: var(--foo-mode-color-brand-rucula);
+  --foo-text-brand-vino: var(--foo-mode-color-brand-vino);
+  --foo-text-brand-tomate: var(--foo-mode-color-brand-tomate);
+  --foo-text-brand-mandarina: var(--foo-mode-color-brand-mandarina);
+  --foo-text-brand-sal: var(--foo-mode-color-brand-sal);
+  --foo-text-info-default: var(--foo-mode-color-info-default);
+  --foo-text-info-default-60: var(--foo-mode-color-info-default-60);
+  --foo-text-info-dark: var(--foo-mode-color-info-dark);
+  --foo-text-info-light: var(--foo-mode-color-info-light);
+  --foo-text-info-lighten: var(--foo-mode-color-info-lighten);
+  --foo-text-info-foreground: var(--foo-mode-color-info-foreground);
+  --foo-text-success-default: var(--foo-mode-color-success-default);
+  --foo-text-success-default-60: var(--foo-mode-color-success-default-60);
+  --foo-text-success-dark: var(--foo-mode-color-success-dark);
+  --foo-text-success-light: var(--foo-mode-color-success-light);
+  --foo-text-success-lighten: var(--foo-mode-color-success-lighten);
+  --foo-text-success-foreground: var(--foo-mode-color-success-foreground);
+  --foo-text-warning-default: var(--foo-mode-color-warning-default);
+  --foo-text-warning-default-60: var(--foo-mode-color-warning-default-60);
+  --foo-text-warning-dark: var(--foo-mode-color-warning-dark);
+  --foo-text-warning-light: var(--foo-mode-color-warning-light);
+  --foo-text-warning-lighten: var(--foo-mode-color-warning-lighten);
+  --foo-text-warning-foreground: var(--foo-mode-color-warning-foreground);
+  --foo-text-error-default: var(--foo-mode-color-error-default);
+  --foo-text-error-default-60: var(--foo-mode-color-error-default-60);
+  --foo-text-error-dark: var(--foo-mode-color-error-dark);
+  --foo-text-error-light: var(--foo-mode-color-error-light);
+  --foo-text-error-lighten: var(--foo-mode-color-error-lighten);
+  --foo-text-error-foreground: var(--foo-mode-color-error-foreground);
+  --foo-text-base-default: var(--foo-mode-color-base-default);
+  --foo-text-base-default-60: var(--foo-mode-color-base-default-60);
+  --foo-text-base-dark: var(--foo-mode-color-base-dark);
+  --foo-text-base-light: var(--foo-mode-color-base-light);
+  --foo-text-base-lighten: var(--foo-mode-color-base-lighten);
+  --foo-text-base-foreground: var(--foo-mode-color-base-foreground);
+  --foo-text-neutral-1: var(--foo-mode-color-neutral-1);
+  --foo-text-neutral-50: var(--foo-mode-color-neutral-50);
+  --foo-text-neutral-100: var(--foo-mode-color-neutral-100);
+  --foo-text-neutral-200: var(--foo-mode-color-neutral-200);
+  --foo-text-neutral-300: var(--foo-mode-color-neutral-300);
+  --foo-text-neutral-400: var(--foo-mode-color-neutral-400);
+  --foo-text-neutral-500: var(--foo-mode-color-neutral-500);
+  --foo-text-neutral-600: var(--foo-mode-color-neutral-600);
+  --foo-text-neutral-700: var(--foo-mode-color-neutral-700);
+  --foo-text-neutral-800: var(--foo-mode-color-neutral-800);
+  --foo-text-neutral-900: var(--foo-mode-color-neutral-900);
+  --foo-text-neutral-950: var(--foo-mode-color-neutral-950);
+  --foo-text-neutral-999: var(--foo-mode-color-neutral-999);
+  --foo-text-neutral-1-60: var(--foo-mode-color-neutral-1-60);
+  --foo-text-neutral-999-60: var(--foo-mode-color-neutral-999-60);
+  /* bg */
+  --foo-bg-muted: var(--foo-mode-color-muted);
+  --foo-bg-skeleton: var(--foo-mode-color-skeleton);
+  --foo-bg-primary-default: var(--foo-mode-color-primary-default); /* CTAs principales, íconos destacados */
+  --foo-bg-primary-default-15: var(--foo-mode-color-primary-default-15); /* CTAs principales, íconos destacados */
+  --foo-bg-primary-default-60: var(--foo-mode-color-primary-default-60);
+  --foo-bg-primary-dark: var(--foo-mode-color-primary-dark);
+  --foo-bg-primary-light: var(--foo-mode-color-primary-light);
+  --foo-bg-primary-lighten: var(--foo-mode-color-primary-lighten);
+  --foo-bg-primary-foreground: var(--foo-mode-color-primary-foreground);
+  --foo-bg-secondary-default: var(--foo-mode-color-secondary-default); /* Acciones o textos secundarios o menos prioritarios */
+  --foo-bg-secondary-default-15: var(--foo-mode-color-secondary-default-15); /* Acciones o textos secundarios o menos prioritarios */
+  --foo-bg-secondary-default-60: var(--foo-mode-color-secondary-default-60);
+  --foo-bg-secondary-dark: var(--foo-mode-color-secondary-dark);
+  --foo-bg-secondary-light: var(--foo-mode-color-secondary-light);
+  --foo-bg-secondary-lighten: var(--foo-mode-color-secondary-lighten);
+  --foo-bg-secondary-foreground: var(--foo-mode-color-secondary-foreground);
+  --foo-bg-subscription-default: var(--foo-mode-color-subscription-default); /* CTA de suscripción */
+  --foo-bg-subscription-default-15: var(--foo-mode-color-subscription-default-15); /* CTA de suscripción */
+  --foo-bg-subscription-default-60: var(--foo-mode-color-subscription-default-60);
+  --foo-bg-subscription-dark: var(--foo-mode-color-subscription-dark);
+  --foo-bg-subscription-light: var(--foo-mode-color-subscription-light);
+  --foo-bg-subscription-lighten: var(--foo-mode-color-subscription-lighten);
+  --foo-bg-subscription-foreground: var(--foo-mode-color-subscription-foreground);
+  --foo-bg-accent-default: var(--foo-mode-color-accent-default); /* Se usa en links, tags, avatars, indicadores, etc */
+  --foo-bg-accent-default-15: var(--foo-mode-color-accent-default-15); /* Se usa en links, tags, avatars, indicadores, etc */
+  --foo-bg-accent-default-60: var(--foo-mode-color-accent-default-60);
+  --foo-bg-accent-dark: var(--foo-mode-color-accent-dark);
+  --foo-bg-accent-light: var(--foo-mode-color-accent-light);
+  --foo-bg-accent-lighten: var(--foo-mode-color-accent-lighten);
+  --foo-bg-accent-foreground: var(--foo-mode-color-accent-foreground);
+  --foo-bg-brand-lechuga: var(--foo-mode-color-brand-lechuga); /* colores de la marca para acentuar o resaltar elementos */
+  --foo-bg-brand-maiz: var(--foo-mode-color-brand-maiz);
+  --foo-bg-brand-rucula: var(--foo-mode-color-brand-rucula);
+  --foo-bg-brand-vino: var(--foo-mode-color-brand-vino);
+  --foo-bg-brand-tomate: var(--foo-mode-color-brand-tomate);
+  --foo-bg-brand-mandarina: var(--foo-mode-color-brand-mandarina);
+  --foo-bg-brand-sal: var(--foo-mode-color-brand-sal);
+  --foo-bg-info-default: var(--foo-mode-color-info-default);
+  --foo-bg-info-default-15: var(--foo-mode-color-info-default-15);
+  --foo-bg-info-default-60: var(--foo-mode-color-info-default-60);
+  --foo-bg-info-dark: var(--foo-mode-color-info-dark);
+  --foo-bg-info-light: var(--foo-mode-color-info-light);
+  --foo-bg-info-lighten: var(--foo-mode-color-info-lighten);
+  --foo-bg-info-foreground: var(--foo-mode-color-info-foreground);
+  --foo-bg-success-default: var(--foo-mode-color-success-default);
+  --foo-bg-success-default-15: var(--foo-mode-color-success-default-15);
+  --foo-bg-success-default-60: var(--foo-mode-color-success-default-60);
+  --foo-bg-success-dark: var(--foo-mode-color-success-dark);
+  --foo-bg-success-light: var(--foo-mode-color-success-light);
+  --foo-bg-success-lighten: var(--foo-mode-color-success-lighten);
+  --foo-bg-success-foreground: var(--foo-mode-color-success-foreground);
+  --foo-bg-warning-default: var(--foo-mode-color-warning-default);
+  --foo-bg-warning-default-15: var(--foo-mode-color-warning-default-15);
+  --foo-bg-warning-default-60: var(--foo-mode-color-warning-default-60);
+  --foo-bg-warning-dark: var(--foo-mode-color-warning-dark);
+  --foo-bg-warning-light: var(--foo-mode-color-warning-light);
+  --foo-bg-warning-lighten: var(--foo-mode-color-warning-lighten);
+  --foo-bg-warning-foreground: var(--foo-mode-color-warning-foreground);
+  --foo-bg-error-default: var(--foo-mode-color-error-default);
+  --foo-bg-error-default-15: var(--foo-mode-color-error-default-15);
+  --foo-bg-error-default-60: var(--foo-mode-color-error-default-60);
+  --foo-bg-error-dark: var(--foo-mode-color-error-dark);
+  --foo-bg-error-light: var(--foo-mode-color-error-light);
+  --foo-bg-error-lighten: var(--foo-mode-color-error-lighten);
+  --foo-bg-error-foreground: var(--foo-mode-color-error-foreground);
+  --foo-bg-base-default: var(--foo-mode-color-base-default);
+  --foo-bg-base-default-15: var(--foo-mode-color-base-default-15);
+  --foo-bg-base-default-60: var(--foo-mode-color-base-default-60);
+  --foo-bg-base-dark: var(--foo-mode-color-base-dark);
+  --foo-bg-base-light: var(--foo-mode-color-base-light);
+  --foo-bg-base-lighten: var(--foo-mode-color-base-lighten);
+  --foo-bg-base-foreground: var(--foo-mode-color-base-foreground);
+  --foo-bg-neutral-1: var(--foo-text-neutral-1);
+  --foo-bg-neutral-50: var(--foo-mode-color-neutral-50);
+  --foo-bg-neutral-100: var(--foo-mode-color-neutral-100);
+  --foo-bg-neutral-200: var(--foo-mode-color-neutral-200);
+  --foo-bg-neutral-300: var(--foo-mode-color-neutral-300);
+  --foo-bg-neutral-400: var(--foo-mode-color-neutral-400);
+  --foo-bg-neutral-500: var(--foo-mode-color-neutral-500);
+  --foo-bg-neutral-600: var(--foo-mode-color-neutral-600);
+  --foo-bg-neutral-700: var(--foo-mode-color-neutral-700);
+  --foo-bg-neutral-800: var(--foo-mode-color-neutral-800);
+  --foo-bg-neutral-900: var(--foo-mode-color-neutral-900);
+  --foo-bg-neutral-950: var(--foo-mode-color-neutral-950);
+  --foo-bg-neutral-999: var(--foo-mode-color-neutral-999);
+  --foo-bg-neutral-1-15: var(--foo-mode-color-neutral-1-15);
+  --foo-bg-neutral-1-60: var(--foo-mode-color-neutral-1-60);
+  --foo-bg-neutral-999-60: var(--foo-mode-color-neutral-999-60);
+  --foo-bg-neutral-999-15: var(--foo-mode-color-neutral-999-15);
+  /* border */
+  --foo-border-primary-default: var(--foo-mode-color-primary-default); /* CTAs principales, íconos destacados */
+  --foo-border-primary-default-60: var(--foo-mode-color-primary-default-60);
+  --foo-border-primary-dark: var(--foo-mode-color-primary-dark);
+  --foo-border-primary-light: var(--foo-mode-color-primary-light);
+  --foo-border-primary-lighten: var(--foo-mode-color-primary-lighten);
+  --foo-border-primary-foreground: var(--foo-mode-color-primary-foreground);
+  --foo-border-secondary-default: var(--foo-mode-color-secondary-default); /* Acciones o textos secundarios o menos prioritarios */
+  --foo-border-secondary-default-60: var(--foo-mode-color-secondary-default-60);
+  --foo-border-secondary-dark: var(--foo-mode-color-secondary-dark);
+  --foo-border-secondary-light: var(--foo-mode-color-secondary-light);
+  --foo-border-secondary-lighten: var(--foo-mode-color-secondary-lighten);
+  --foo-border-secondary-foreground: var(--foo-mode-color-secondary-foreground);
+  --foo-border-subscription-default: var(--foo-mode-color-subscription-default); /* CTA de suscripción */
+  --foo-border-subscription-default-60: var(--foo-mode-color-subscription-default-60);
+  --foo-border-subscription-dark: var(--foo-mode-color-subscription-dark);
+  --foo-border-subscription-light: var(--foo-mode-color-subscription-light);
+  --foo-border-subscription-lighten: var(--foo-mode-color-subscription-lighten);
+  --foo-border-subscription-foreground: var(--foo-mode-color-subscription-foreground);
+  --foo-border-accent-default: var(--foo-mode-color-accent-default); /* Se usa en links, tags, avatars, indicadores, etc */
+  --foo-border-accent-default-60: var(--foo-mode-color-accent-default-60);
+  --foo-border-accent-dark: var(--foo-mode-color-accent-dark);
+  --foo-border-accent-light: var(--foo-mode-color-accent-light);
+  --foo-border-accent-lighten: var(--foo-mode-color-accent-lighten);
+  --foo-border-accent-foreground: var(--foo-mode-color-accent-foreground);
+  --foo-border-brand-lechuga: var(--foo-mode-color-brand-lechuga); /* colores de la marca para acentuar o resaltar elementos */
+  --foo-border-brand-maiz: var(--foo-mode-color-brand-maiz);
+  --foo-border-brand-rucula: var(--foo-mode-color-brand-rucula);
+  --foo-border-brand-vino: var(--foo-mode-color-brand-vino);
+  --foo-border-brand-tomate: var(--foo-mode-color-brand-tomate);
+  --foo-border-brand-mandarina: var(--foo-mode-color-brand-mandarina);
+  --foo-border-brand-sal: var(--foo-mode-color-brand-sal);
+  --foo-border-info-default: var(--foo-mode-color-info-default);
+  --foo-border-info-default-60: var(--foo-mode-color-info-default-60);
+  --foo-border-info-dark: var(--foo-mode-color-info-dark);
+  --foo-border-info-light: var(--foo-mode-color-info-light);
+  --foo-border-info-lighten: var(--foo-mode-color-info-lighten);
+  --foo-border-info-foreground: var(--foo-mode-color-info-foreground);
+  --foo-border-success-default: var(--foo-mode-color-success-default);
+  --foo-border-success-default-60: var(--foo-mode-color-success-default-60);
+  --foo-border-success-dark: var(--foo-mode-color-success-dark);
+  --foo-border-success-light: var(--foo-mode-color-success-light);
+  --foo-border-success-lighten: var(--foo-mode-color-success-lighten);
+  --foo-border-success-foreground: var(--foo-mode-color-success-foreground);
+  --foo-border-warning-default: var(--foo-mode-color-warning-default);
+  --foo-border-warning-default-60: var(--foo-mode-color-warning-default-60);
+  --foo-border-warning-dark: var(--foo-mode-color-warning-dark);
+  --foo-border-warning-light: var(--foo-mode-color-warning-light);
+  --foo-border-warning-lighten: var(--foo-mode-color-warning-lighten);
+  --foo-border-warning-foreground: var(--foo-mode-color-warning-foreground);
+  --foo-border-error-default: var(--foo-mode-color-error-default);
+  --foo-border-error-default-60: var(--foo-mode-color-error-default-60);
+  --foo-border-error-dark: var(--foo-mode-color-error-dark);
+  --foo-border-error-light: var(--foo-mode-color-error-light);
+  --foo-border-error-lighten: var(--foo-mode-color-error-lighten);
+  --foo-border-error-foreground: var(--foo-mode-color-error-foreground);
+  --foo-border-base-default: var(--foo-mode-color-base-default);
+  --foo-border-base-default-60: var(--foo-mode-color-base-default-60);
+  --foo-border-base-dark: var(--foo-mode-color-base-dark);
+  --foo-border-base-light: var(--foo-mode-color-base-light);
+  --foo-border-base-lighten: var(--foo-mode-color-base-lighten);
+  --foo-border-base-foreground: var(--foo-mode-color-base-foreground);
+  --foo-border-neutral-1: var(--foo-mode-color-neutral-1);
+  --foo-border-neutral-50: var(--foo-mode-color-neutral-50);
+  --foo-border-neutral-100: var(--foo-mode-color-neutral-100);
+  --foo-border-neutral-200: var(--foo-mode-color-neutral-200);
+  --foo-border-neutral-300: var(--foo-mode-color-neutral-300);
+  --foo-border-neutral-400: var(--foo-mode-color-neutral-400);
+  --foo-border-neutral-500: var(--foo-mode-color-neutral-500);
+  --foo-border-neutral-600: var(--foo-mode-color-neutral-600);
+  --foo-border-neutral-700: var(--foo-mode-color-neutral-700);
+  --foo-border-neutral-800: var(--foo-mode-color-neutral-800);
+  --foo-border-neutral-900: var(--foo-mode-color-neutral-900);
+  --foo-border-neutral-950: var(--foo-mode-color-neutral-950);
+  --foo-border-neutral-999: var(--foo-mode-color-neutral-999);
+  --foo-border-neutral-1-15: var(--foo-mode-color-neutral-1-15);
+  --foo-border-neutral-1-60: var(--foo-mode-color-neutral-1-60);
+  --foo-border-neutral-999-60: var(--foo-mode-color-neutral-999-60);
+  --foo-border-neutral-999-15: var(--foo-mode-color-neutral-999-15);
+  --foo-border-sm: var(--border-1);
+  --foo-border-md: var(--border-4);
+  --foo-border-lg: var(--border-32);
+  --foo-border-muted: var(--foo-mode-color-muted);
+  --foo-border-skeleton: var(--foo-mode-color-skeleton);
+  /* radius */
+  --foo-radius-sm: var(--radius-4); /* 8 */
+  --foo-radius-md: var(--border-8); /* 16 */
+  --foo-radius-lg: var(--radius-16); /* 32 */
+}
+
+/* ---------- [FOO] Semantic MODE — modo Light ---------- */
+:root {
+  /* color */
+  --foo-mode-color-primary-default: var(--foo-primitive-color-primary-default);
+  --foo-mode-color-primary-default-15: rgba(51, 51, 51, 0.15);
+  --foo-mode-color-primary-default-60: rgba(51, 51, 51, 0.6);
+  --foo-mode-color-primary-dark: var(--foo-primitive-color-primary-dark);
+  --foo-mode-color-primary-light: var(--foo-primitive-color-primary-light);
+  --foo-mode-color-primary-lighten: var(--foo-primitive-color-primary-lighten);
+  --foo-mode-color-primary-foreground: var(--foo-primitive-color-primary-foreground);
+  --foo-mode-color-secondary-default: var(--foo-primitive-color-secondary-default);
+  --foo-mode-color-secondary-default-15: rgba(102, 102, 102, 0.15);
+  --foo-mode-color-secondary-default-60: rgba(102, 102, 102, 0.6);
+  --foo-mode-color-secondary-dark: var(--foo-primitive-color-secondary-dark);
+  --foo-mode-color-secondary-light: var(--foo-primitive-color-secondary-light);
+  --foo-mode-color-secondary-lighten: var(--foo-primitive-color-secondary-lighten);
+  --foo-mode-color-secondary-foreground: var(--foo-primitive-color-secondary-foreground);
+  --foo-mode-color-subscription-default: var(--foo-primitive-color-subscription-default);
+  --foo-mode-color-subscription-default-15: rgba(252, 200, 70, 0.15);
+  --foo-mode-color-subscription-default-60: rgba(252, 200, 70, 0.6);
+  --foo-mode-color-subscription-dark: var(--foo-primitive-color-subscription-dark);
+  --foo-mode-color-subscription-light: var(--foo-primitive-color-subscription-light);
+  --foo-mode-color-subscription-lighten: var(--foo-primitive-color-subscription-lighten);
+  --foo-mode-color-subscription-foreground: var(--foo-primitive-color-subscription-foreground);
+  --foo-mode-color-accent-default: var(--foo-primitive-color-accent-default);
+  --foo-mode-color-accent-default-15: rgba(132, 107, 5, 0.15);
+  --foo-mode-color-accent-default-60: rgba(132, 107, 5, 0.6);
+  --foo-mode-color-accent-dark: var(--foo-primitive-color-accent-dark);
+  --foo-mode-color-accent-light: var(--foo-primitive-color-accent-light);
+  --foo-mode-color-accent-lighten: var(--foo-primitive-color-accent-lighten);
+  --foo-mode-color-accent-foreground: var(--foo-primitive-color-accent-foreground);
+  --foo-mode-color-brand-lechuga: var(--foo-primitive-color-brand-lechuga); /* Se utiliza en el hover desktop */
+  --foo-mode-color-brand-maiz: var(--foo-primitive-color-brand-maiz);
+  --foo-mode-color-brand-rucula: var(--foo-primitive-color-brand-rucula);
+  --foo-mode-color-brand-vino: var(--foo-primitive-color-brand-vino);
+  --foo-mode-color-brand-tomate: var(--foo-primitive-color-brand-tomate);
+  --foo-mode-color-brand-mandarina: var(--foo-primitive-color-brand-mandarina);
+  --foo-mode-color-brand-sal: var(--foo-primitive-color-brand-sal);
+  --foo-mode-color-info-default: var(--foo-primitive-color-info-default);
+  --foo-mode-color-info-default-15: rgba(113, 94, 17, 0.15);
+  --foo-mode-color-info-default-60: rgba(113, 94, 17, 0.6);
+  --foo-mode-color-info-dark: var(--foo-primitive-color-info-dark);
+  --foo-mode-color-info-light: var(--foo-primitive-color-info-light);
+  --foo-mode-color-info-lighten: var(--foo-primitive-color-info-lighten);
+  --foo-mode-color-info-foreground: var(--foo-primitive-color-info-foreground);
+  --foo-mode-color-success-default: var(--foo-primitive-color-success-default);
+  --foo-mode-color-success-default-15: rgba(33, 83, 39, 0.15);
+  --foo-mode-color-success-default-60: rgba(33, 83, 39, 0.6);
+  --foo-mode-color-success-dark: var(--foo-primitive-color-success-dark);
+  --foo-mode-color-success-light: var(--foo-primitive-color-success-light);
+  --foo-mode-color-success-lighten: var(--foo-primitive-color-success-lighten);
+  --foo-mode-color-success-foreground: var(--foo-primitive-color-success-foreground);
+  --foo-mode-color-warning-default: var(--foo-primitive-color-warning-default);
+  --foo-mode-color-warning-default-15: rgba(244, 202, 95, 0.15);
+  --foo-mode-color-warning-default-60: rgba(244, 202, 95, 0.6);
+  --foo-mode-color-warning-dark: var(--foo-primitive-color-warning-dark);
+  --foo-mode-color-warning-light: var(--foo-primitive-color-warning-light);
+  --foo-mode-color-warning-lighten: var(--foo-primitive-color-warning-lighten);
+  --foo-mode-color-warning-foreground: var(--foo-primitive-color-warning-foreground);
+  --foo-mode-color-error-default: var(--foo-primitive-color-error-default);
+  --foo-mode-color-error-default-15: rgba(169, 44, 44, 0.15);
+  --foo-mode-color-error-default-60: rgba(169, 44, 44, 0.6);
+  --foo-mode-color-error-dark: var(--foo-primitive-color-error-dark);
+  --foo-mode-color-error-light: var(--foo-primitive-color-error-light);
+  --foo-mode-color-error-lighten: var(--foo-primitive-color-error-lighten);
+  --foo-mode-color-error-foreground: var(--foo-primitive-color-error-foreground);
+  --foo-mode-color-base-default: var(--foo-primitive-color-base-default);
+  --foo-mode-color-base-default-15: rgba(51, 51, 51, 0.15);
+  --foo-mode-color-base-default-60: rgba(51, 51, 51, 0.6);
+  --foo-mode-color-base-dark: var(--foo-primitive-color-base-dark);
+  --foo-mode-color-base-light: var(--foo-primitive-color-base-light);
+  --foo-mode-color-base-lighten: var(--foo-primitive-color-base-lighten);
+  --foo-mode-color-base-foreground: var(--foo-primitive-color-base-foreground);
+  --foo-mode-color-neutral-1: var(--color-neutral-1);
+  --foo-mode-color-neutral-50: var(--color-neutral-50);
+  --foo-mode-color-neutral-100: var(--color-neutral-100);
+  --foo-mode-color-neutral-200: var(--color-neutral-200);
+  --foo-mode-color-neutral-300: var(--color-neutral-300);
+  --foo-mode-color-neutral-400: var(--color-neutral-400);
+  --foo-mode-color-neutral-500: var(--color-neutral-500);
+  --foo-mode-color-neutral-600: var(--color-neutral-600);
+  --foo-mode-color-neutral-700: var(--color-neutral-700);
+  --foo-mode-color-neutral-800: var(--color-neutral-800);
+  --foo-mode-color-neutral-900: var(--color-neutral-900);
+  --foo-mode-color-neutral-950: var(--color-neutral-950);
+  --foo-mode-color-neutral-999: var(--color-neutral-999);
+  --foo-mode-color-neutral-1-60: rgba(254, 254, 254, 0.6);
+  --foo-mode-color-neutral-1-15: rgba(254, 254, 254, 0.15);
+  --foo-mode-color-neutral-999-60: rgba(1, 1, 1, 0.6);
+  --foo-mode-color-neutral-999-15: rgba(1, 1, 1, 0.15);
+  --foo-mode-color-muted: var(--color-neutral-100);
+  --foo-mode-color-skeleton: var(--color-neutral-50);
+}
+
+/* ---------- [FOO] Semantic MODE — modo Dark ---------- */
+:root[data-mode="dark"] {
+  /* color */
+  --foo-mode-color-primary-default: var(--foo-primitive-color-primary-default);
+  --foo-mode-color-primary-default-15: rgba(51, 51, 51, 0.15);
+  --foo-mode-color-primary-default-60: rgba(51, 51, 51, 0.6);
+  --foo-mode-color-primary-dark: var(--foo-primitive-color-primary-dark);
+  --foo-mode-color-primary-light: var(--foo-primitive-color-primary-light);
+  --foo-mode-color-primary-lighten: var(--foo-primitive-color-primary-lighten);
+  --foo-mode-color-primary-foreground: var(--foo-primitive-color-primary-foreground);
+  --foo-mode-color-secondary-default: var(--foo-primitive-color-secondary-default);
+  --foo-mode-color-secondary-default-15: rgba(102, 102, 102, 0.15);
+  --foo-mode-color-secondary-default-60: rgba(102, 102, 102, 0.6);
+  --foo-mode-color-secondary-dark: var(--foo-primitive-color-secondary-dark);
+  --foo-mode-color-secondary-light: var(--foo-primitive-color-secondary-light);
+  --foo-mode-color-secondary-lighten: var(--foo-primitive-color-secondary-lighten);
+  --foo-mode-color-secondary-foreground: var(--foo-primitive-color-secondary-foreground);
+  --foo-mode-color-subscription-default: var(--foo-primitive-color-subscription-default);
+  --foo-mode-color-subscription-default-15: rgba(252, 200, 70, 0.15);
+  --foo-mode-color-subscription-default-60: rgba(252, 200, 70, 0.6);
+  --foo-mode-color-subscription-dark: var(--foo-primitive-color-subscription-dark);
+  --foo-mode-color-subscription-light: var(--foo-primitive-color-subscription-light);
+  --foo-mode-color-subscription-lighten: var(--foo-primitive-color-subscription-lighten);
+  --foo-mode-color-subscription-foreground: var(--foo-primitive-color-subscription-foreground);
+  --foo-mode-color-accent-default: var(--foo-primitive-color-accent-default);
+  --foo-mode-color-accent-default-15: rgba(132, 107, 5, 0.15);
+  --foo-mode-color-accent-default-60: rgba(132, 107, 5, 0.6);
+  --foo-mode-color-accent-dark: var(--foo-primitive-color-accent-dark);
+  --foo-mode-color-accent-light: var(--foo-primitive-color-accent-light);
+  --foo-mode-color-accent-lighten: var(--foo-primitive-color-accent-lighten);
+  --foo-mode-color-accent-foreground: var(--foo-primitive-color-accent-foreground);
+  --foo-mode-color-brand-lechuga: var(--foo-primitive-color-brand-lechuga); /* Se utiliza en el hover desktop */
+  --foo-mode-color-brand-maiz: var(--foo-primitive-color-brand-maiz);
+  --foo-mode-color-brand-rucula: var(--foo-primitive-color-brand-rucula);
+  --foo-mode-color-brand-vino: var(--foo-primitive-color-brand-vino);
+  --foo-mode-color-brand-tomate: var(--foo-primitive-color-brand-tomate);
+  --foo-mode-color-brand-mandarina: var(--foo-primitive-color-brand-mandarina);
+  --foo-mode-color-brand-sal: var(--foo-primitive-color-brand-sal);
+  --foo-mode-color-info-default: var(--foo-primitive-color-info-default);
+  --foo-mode-color-info-default-15: rgba(113, 94, 17, 0.15);
+  --foo-mode-color-info-default-60: rgba(113, 94, 17, 0.6);
+  --foo-mode-color-info-dark: var(--foo-primitive-color-info-dark);
+  --foo-mode-color-info-light: var(--foo-primitive-color-info-light);
+  --foo-mode-color-info-lighten: var(--foo-primitive-color-info-lighten);
+  --foo-mode-color-info-foreground: var(--foo-primitive-color-info-foreground);
+  --foo-mode-color-success-default: var(--foo-primitive-color-success-default);
+  --foo-mode-color-success-default-15: rgba(33, 83, 39, 0.15);
+  --foo-mode-color-success-default-60: rgba(33, 83, 39, 0.6);
+  --foo-mode-color-success-dark: var(--foo-primitive-color-success-dark);
+  --foo-mode-color-success-light: var(--foo-primitive-color-success-light);
+  --foo-mode-color-success-lighten: var(--foo-primitive-color-success-lighten);
+  --foo-mode-color-success-foreground: var(--foo-primitive-color-success-foreground);
+  --foo-mode-color-warning-default: var(--foo-primitive-color-warning-default);
+  --foo-mode-color-warning-default-15: rgba(244, 202, 95, 0.15);
+  --foo-mode-color-warning-default-60: rgba(244, 202, 95, 0.6);
+  --foo-mode-color-warning-dark: var(--foo-primitive-color-warning-dark);
+  --foo-mode-color-warning-light: var(--foo-primitive-color-warning-light);
+  --foo-mode-color-warning-lighten: var(--foo-primitive-color-warning-lighten);
+  --foo-mode-color-warning-foreground: var(--foo-primitive-color-warning-foreground);
+  --foo-mode-color-error-default: var(--foo-primitive-color-error-default);
+  --foo-mode-color-error-default-15: rgba(169, 44, 44, 0.15);
+  --foo-mode-color-error-default-60: rgba(169, 44, 44, 0.6);
+  --foo-mode-color-error-dark: var(--foo-primitive-color-error-dark);
+  --foo-mode-color-error-light: var(--foo-primitive-color-error-light);
+  --foo-mode-color-error-lighten: var(--foo-primitive-color-error-lighten);
+  --foo-mode-color-error-foreground: var(--foo-primitive-color-error-foreground);
+  --foo-mode-color-base-default: var(--foo-primitive-color-base-default);
+  --foo-mode-color-base-default-15: rgba(51, 51, 51, 0.15);
+  --foo-mode-color-base-default-60: rgba(51, 51, 51, 0.6);
+  --foo-mode-color-base-dark: var(--foo-primitive-color-base-dark);
+  --foo-mode-color-base-light: var(--foo-primitive-color-base-light);
+  --foo-mode-color-base-lighten: var(--foo-primitive-color-base-lighten);
+  --foo-mode-color-base-foreground: var(--foo-primitive-color-base-foreground);
+  --foo-mode-color-neutral-1: var(--color-neutral-999);
+  --foo-mode-color-neutral-50: var(--color-neutral-950);
+  --foo-mode-color-neutral-100: var(--color-neutral-900);
+  --foo-mode-color-neutral-200: var(--color-neutral-800);
+  --foo-mode-color-neutral-300: var(--color-neutral-700);
+  --foo-mode-color-neutral-400: var(--color-neutral-600);
+  --foo-mode-color-neutral-500: var(--color-neutral-500);
+  --foo-mode-color-neutral-600: var(--color-neutral-400);
+  --foo-mode-color-neutral-700: var(--color-neutral-300);
+  --foo-mode-color-neutral-800: var(--color-neutral-200);
+  --foo-mode-color-neutral-900: var(--color-neutral-100);
+  --foo-mode-color-neutral-950: var(--color-neutral-50);
+  --foo-mode-color-neutral-999: var(--color-neutral-1);
+  --foo-mode-color-neutral-1-60: rgba(1, 1, 1, 0.6);
+  --foo-mode-color-neutral-1-15: rgba(1, 1, 1, 0.15);
+  --foo-mode-color-neutral-999-60: rgba(254, 254, 254, 0.6);
+  --foo-mode-color-neutral-999-15: rgba(254, 254, 254, 0.15);
+  --foo-mode-color-muted: var(--color-neutral-100);
+  --foo-mode-color-skeleton: var(--color-neutral-50);
+}

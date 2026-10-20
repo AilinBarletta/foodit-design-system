@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es" data-brand="foodit">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foodit — Detalle de receta</title>
+
+<!-- Rutas relativas: este archivo vive en prototipo/ -->
+<link rel="stylesheet" href="../global-primitives.css">
+<link rel="stylesheet" href="../foodit.css">
+<link rel="stylesheet" href="../core-semantic.css">
+<link rel="stylesheet" href="../components.css">
+
+<style>
+  body {
+    margin: var(--p-none);
+    background-color: var(--bg-neutral-50);
+    color: var(--text-neutral-900);
+    font-family: var(--font-secondary), sans-serif;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-24);
+    padding: var(--p-responsive);
+    max-inline-size: var(--breakpoint-web-xl);
+    margin-inline: auto;
+  }
+
+  /* ---------- Barra superior ---------- */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--gap-16);
+    padding: var(--p-16);
+    border-radius: var(--components-button-radius);
+    background-color: var(--bg-neutral-1);
+    border: var(--border-sm) solid var(--border-muted);
+  }
+
+  .topbar__brand {
+    margin: var(--p-none);
+    font-family: var(--font-primary), serif;
+    font-size: var(--text-heading-sm);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .topbar__tools {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--gap-12);
+  }
+
+  .topbar__search {
+    inline-size: var(--breakpoint-web-sm);
+  }
+
+  /* ---------- Filtros ---------- */
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-8);
+  }
+
+  .filters__label {
+    margin: var(--p-none);
+    font-size: var(--text-label-sm);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .filters__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-8);
+    margin: var(--p-none);
+    padding: var(--p-none);
+    list-style: none;
+  }
+
+  /* ---------- Receta ---------- */
+  .recipe {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-24);
+  }
+
+  @media (min-width: 1024px) {
+    .recipe {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .recipe__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-16);
+  }
+
+  .recipe__media {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap-8);
+    aspect-ratio: 16 / 9; /* TODO: proporción de imagen no definida en Figma */
+    padding: var(--p-16);
+    border-radius: var(--radius-md);
+    /* Imagen: sin token de imagen en Figma, se usa el placeholder de Card */
+    background-color: var(--bg-skeleton);
+  }
+
+  .recipe__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-8);
+  }
+
+  .recipe__title {
+    margin: var(--p-none);
+    font-family: var(--font-primary), serif;
+    font-size: var(--text-heading-md);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .recipe__lead {
+    margin: var(--p-none);
+    font-size: var(--text-body-md);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-600);
+  }
+
+  .recipe__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-8);
+    margin: var(--p-none);
+  }
+
+  .recipe__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--gap-8);
+  }
+
+  .recipe__feedback {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-12);
+  }
+
+  .recipe__side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-16);
+  }
+
+  .section-title {
+    margin: var(--p-none);
+    font-size: var(--text-subheading-sm);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-12);
+    padding-block-start: var(--p-16);
+    border-block-start: var(--border-sm) solid var(--border-muted);
+    font-size: var(--text-small-lg);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-600);
+  }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <!-- ============================ Barra superior ============================ -->
+  <header class="topbar">
+    <p class="topbar__brand">Foodit</p>
+
+    <div class="topbar__tools">
+      <!-- Input de búsqueda: floating label + ícono a izquierda -->
+      <div
+        class="ds-field topbar__search"
+        data-label-type="floating"
+        data-color="default"
+        data-size="48"
+        data-state="enabled">
+        <div class="ds-field__control">
+          <span class="ds-field__icon ds-field__icon--start" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="M16.5 16.5 21 21" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <input
+            class="ds-field__input"
+            id="recipe-search"
+            type="search"
+            placeholder=" "
+            autocomplete="off"
+            aria-label="Buscar recetas o categorías">
+          <label class="ds-field__label" for="recipe-search">Buscar recetas o categorías</label>
+        </div>
+      </div>
+
+      <button
+        class="ds-btn"
+        type="button"
+        id="mode-toggle"
+        data-variant="ghost"
+        data-color="black"
+        data-size="32"
+        aria-pressed="false">
+        <span class="ds-btn__label">Modo oscuro</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================ Filtros: chips ============================ -->
+  <section class="filters" aria-label="Filtros por categoría">
+    <p class="filters__label" id="filters-label">Categorías</p>
+    <ul class="filters__list" aria-labelledby="filters-label">
+      <li>
+        <span class="ds-chip" data-type="informative" data-variant="solid" data-color="black" data-size="30">
+          <span class="ds-chip__label">Todas</span>
+        </span>
+      </li>
+      <li>
+        <button class="ds-chip" type="button" data-type="clickable" data-variant="solid" data-color="primary" data-size="30">
+          <span class="ds-chip__label">Pastas</span>
+        </button>
+      </li>
+      <li>
+        <button class="ds-chip" type="button" data-type="clickable" data-variant="outline" data-color="primary" data-size="30">
+          <span class="ds-chip__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v18M4 8h16" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <span class="ds-chip__label">Vegetariano</span>
+        </button>
+      </li>
+      <li>
+        <button class="ds-chip" type="button" data-type="clickable" data-variant="ghost" data-color="primary" data-size="30">
+          <span class="ds-chip__label">Carnes</span>
+        </button>
+      </li>
+      <li>
+        <button class="ds-chip" type="button" data-type="clickable" data-variant="solid" data-color="secondary" data-size="24">
+          <span class="ds-chip__label">Rápidas</span>
+        </button>
+      </li>
+      <li>
+        <button class="ds-chip" type="button" data-type="closable" data-variant="solid" data-color="error" data-size="24" data-filter="sin-gluten" aria-label="Quitar el filtro sin gluten">
+          <span class="ds-chip__label">Sin gluten</span>
+          <span class="ds-chip__close" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path>
+            </svg>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button class="ds-chip" type="button" data-type="closable" data-variant="outline" data-color="black" data-size="24" data-filter="dulces" aria-label="Quitar el filtro dulces">
+          <span class="ds-chip__label">Dulces</span>
+          <span class="ds-chip__close" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path>
+            </svg>
+          </span>
+        </button>
+      </li>
+      <li>
+        <button class="ds-chip" type="button" data-type="clickable" data-variant="solid" data-color="black" data-size="30" disabled>
+          <span class="ds-chip__label">Dietéticas</span>
+        </button>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============================ Detalle ============================ -->
+  <div class="recipe">
+
+    <main class="recipe__main">
+      <!-- Imagen con badges sobre la imagen -->
+      <div class="recipe__media">
+        <div class="recipe__badges">
+          <span class="ds-badge" data-variant="solid" data-color="white" data-size="md" data-on-image="light">Nuevo</span>
+          <span class="ds-badge" data-variant="solid" data-color="error" data-size="md">40 min</span>
+        </div>
+      </div>
+
+      <p class="recipe__meta">
+        <span class="ds-badge" data-variant="outline" data-color="black" data-size="sm">Italiana</span>
+        <span class="ds-badge" data-variant="solid" data-color="subscription" data-size="sm">Premium</span>
+        <span class="ds-badge" data-variant="solid" data-color="primary" data-size="sm">4.8 ★</span>
+      </p>
+
+      <h1 class="recipe__title">Risotto de hongos y parmesano</h1>
+
+      <p class="recipe__lead">
+        Una crema de arroz carnaroli con hongos salteados, vino blanco y
+        parmesano rallado al momento. Se termina con un hilo de aceite de oliva
+        y perejil fresco picado.
+      </p>
+
+      <div class="recipe__actions">
+        <button class="ds-btn" type="button" data-variant="solid" data-color="primary" data-size="48" id="save-btn">
+          <span class="ds-btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20s-7-4.5-7-9a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 4.5-7 9-7 9z" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span class="ds-btn__label">Guardar</span>
+        </button>
+
+        <button class="ds-btn" type="button" data-variant="outline" data-color="black" data-size="40">
+          <span class="ds-btn__label">Compartir</span>
+          <span class="ds-btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </button>
+
+        <button class="ds-btn" type="button" data-variant="ghost" data-color="error" data-size="32">
+          <span class="ds-btn__label">Descartar</span>
+        </button>
+
+        <button class="ds-btn" type="button" data-variant="solid" data-color="accent" data-size="32" id="demo-loading">
+          <span class="ds-btn__label">Probar loading</span>
+          <span class="ds-btn__spinner" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle class="ds-spin-track" cx="12" cy="12" r="9" pathLength="100"></circle>
+              <circle class="ds-spin-head" cx="12" cy="12" r="9" pathLength="100"></circle>
+            </svg>
+          </span>
+        </button>
+
+        <button
+          class="ds-btn"
+          type="button"
+          data-variant="outline"
+          data-color="secondary"
+          data-size="32"
+          data-only-icon
+          aria-label="Imprimir receta">
+          <span class="ds-btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 9V4h10v5M7 15H5a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-2M7 14h10v6H7z" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </button>
+
+        <button class="ds-btn" type="button" data-variant="solid" data-color="subscription" data-size="40" disabled>
+          <span class="ds-btn__label">Suscriptores</span>
+        </button>
+      </div>
+
+      <!-- Alertas y toast -->
+      <div class="recipe__feedback">
+        <div class="ds-alert" data-type="error" data-style="light" role="alert">
+          <span class="ds-alert__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 8l8 8M16 8l-8 8" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <div class="ds-alert__body">
+            <p class="ds-alert__title">¡Uppps!</p>
+            <p class="ds-alert__desc">
+              No pudimos cargar los comentarios de esta receta. Revisá tu
+              conexión e intentá de nuevo.
+            </p>
+            <div class="ds-alert__slot">
+              <button class="ds-btn" type="button" data-variant="solid" data-color="error" data-size="32">
+                <span class="ds-btn__label">Reintentar</span>
+              </button>
+              <button class="ds-btn" type="button" data-variant="ghost" data-color="error" data-size="32">
+                <span class="ds-btn__label">Cerrar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-alert" data-type="success" data-style="solid" role="status">
+          <span class="ds-alert__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M6 12.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <div class="ds-alert__body">
+            <p class="ds-alert__title">¡Listo!</p>
+            <p class="ds-alert__desc">La receta se guardó en tu libreta de cocina.</p>
+          </div>
+        </div>
+
+        <div class="ds-toast" data-type="info" data-style="light" role="status">
+          <span class="ds-toast__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M12 11v6M12 7.5v.5" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <div class="ds-toast__body">
+            <p class="ds-toast__title">Información</p>
+            <p class="ds-toast__desc">Esta receta tiene 3 reseñas nuevas.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============================ Sidebar ============================ -->
+    <aside class="recipe__side" aria-label="Recetas relacionadas">
+      <p class="section-title">Te puede interesar</p>
+
+      <article class="ds-card">
+        <div class="ds-card__media" role="img" aria-label="Placeholder de imagen"></div>
+        <div class="ds-card__body">
+          <p class="ds-card__title">Ñoquis de papa al sugo</p>
+          <p class="ds-card__text">
+            Clásico de domingo: ñoquis caseros con salsa de tomate y albahaca.
+          </p>
+          <p>
+            <span class="ds-badge" data-variant="solid" data-color="black" data-size="sm">45 min</span>
+          </p>
+        </div>
+      </article>
+
+      <div class="ds-alert" data-type="warning" data-style="light" role="status">
+        <span class="ds-alert__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 4l9 16H3z" stroke-linejoin="round"></path>
+            <path d="M12 10v4M12 17v.5" stroke-linecap="round"></path>
+          </svg>
+        </span>
+        <div class="ds-alert__body">
+          <p class="ds-alert__title">¡Atención!</p>
+          <p class="ds-alert__desc">Los tiempos varían según el tipo de arroz.</p>
+        </div>
+      </div>
+
+      <div class="ds-alert" data-type="skeleton" data-style="light" aria-hidden="true">
+        <span class="ds-alert__icon"></span>
+        <div class="ds-alert__body">
+          <p class="ds-alert__title"></p>
+          <p class="ds-alert__desc"></p>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <footer class="footer">
+    <span>Prototipo de Foodit armado solo con components.css</span>
+    <a class="ds-btn" href="../docs.html" data-variant="ghost" data-color="black" data-size="32">
+      <span class="ds-btn__label">Ver documentación</span>
+    </a>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  /* ---------- Switch de modo oscuro ---------- */
+  var toggle = document.getElementById('mode-toggle');
+  var toggleLabel = toggle.querySelector('.ds-btn__label');
+  toggle.addEventListener('click', function () {
+    var isDark = root.getAttribute('data-mode') === 'dark';
+    if (isDark) {
+      root.removeAttribute('data-mode');
+    } else {
+      root.setAttribute('data-mode', 'dark');
+    }
+    var dark = root.getAttribute('data-mode') === 'dark';
+    toggle.setAttribute('aria-pressed', String(dark));
+    toggleLabel.textContent = dark ? 'Modo claro' : 'Modo oscuro';
+  });
+
+  /* ---------- Chips cerrables ---------- */
+  document.querySelectorAll('.ds-chip[data-type="closable"]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var item = chip.closest('li');
+      if (item) {
+        item.remove();
+      }
+    });
+  });
+
+  /* ---------- Búsqueda: filtra los chips de categoría ---------- */
+  var search = document.getElementById('recipe-search');
+  search.addEventListener('input', function () {
+    var query = search.value.trim().toLowerCase();
+    document.querySelectorAll('.filters__list li').forEach(function (item) {
+      var text = item.textContent.toLowerCase();
+      var match = text.indexOf(query) !== -1;
+      if (match) {
+        item.removeAttribute('hidden');
+      } else {
+        item.setAttribute('hidden', '');
+      }
+    });
+  });
+
+  /* ---------- Demo del estado loading ----------
+     El timeout es lógica de la demo, no un token de diseño. */
+  var loadingBtn = document.getElementById('demo-loading');
+  loadingBtn.addEventListener('click', function () {
+    loadingBtn.setAttribute('data-state', 'loading');
+    loadingBtn.setAttribute('aria-busy', 'true');
+    window.setTimeout(function () {
+      loadingBtn.removeAttribute('data-state');
+      loadingBtn.removeAttribute('aria-busy');
+    }, 1600);
+  });
+})();
+</script>
+</body>
+</html>

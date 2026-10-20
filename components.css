@@ -1,0 +1,1308 @@
+/* ==========================================================================
+   components.css — Design System La Nación (Core)
+   Componentes definidos en design-system-spec.md.
+
+   Reglas de este archivo:
+   - Los componentes usan SOLO variables de core-semantic.css, más espaciados,
+     tamaños, anchos de borde, radios y pesos de global-primitives.css
+     (--p-*, --gap-*, --size-*, --border-*, --radius-*, --font-weight-*).
+   - Nunca se referencian variables --foo-*: siempre se pasa por Core.
+   - No se embeben valores fijos. Cuando falta un token se deja
+     /* TODO: token no definido en Figma */ junto al valor de la spec.
+   - Orden de carga: global-primitives.css -> foodit.css ->
+     core-semantic.css -> components.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Base compartida
+   -------------------------------------------------------------------------- */
+
+.ds-btn,
+.ds-field,
+.ds-chip,
+.ds-badge,
+.ds-alert,
+.ds-toast,
+.ds-card {
+  box-sizing: border-box;
+  font-family: var(--font-secondary), sans-serif;
+}
+
+/* TODO: token de duración no definido en Figma */
+/* TODO: token de easing no definido en Figma */
+.ds-btn,
+.ds-field__control,
+.ds-chip,
+.ds-badge,
+.ds-alert,
+.ds-toast,
+.ds-card {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+/* Spinner compartido (Button loading).
+   TODO: token de duración de rotación no definido en Figma */
+@keyframes ds-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+/* ==========================================================================
+   Button
+   Propiedades: variant solid|outline|ghost · color primary|secondary|accent|
+   subscription|error|black|white · size 48|40|32 · state default|hover|loading|
+   disabled · isOnlyIcon · ícono opcional a izquierda y derecha.
+   ========================================================================== */
+
+.ds-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-8);
+  /* valores por defecto = size 48 */
+  block-size: var(--size-48);
+  padding-inline: var(--p-20);
+  font-size: var(--text-label-lg);
+  --btn-icon: var(--size-20);
+  border: var(--border-none) solid transparent;
+  border-radius: var(--components-button-radius);
+  background-color: var(--btn-solid-bg, transparent);
+  color: var(--btn-solid-fg, inherit);
+  font-weight: var(--font-weight-bold);
+  line-height: 1; /* TODO: token de line-height no definido en Figma (spec: 1) */
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.ds-btn[data-size="40"] {
+  block-size: var(--size-40);
+  padding-inline: var(--p-12);
+  gap: var(--gap-8);
+  font-size: var(--text-label-md);
+  --btn-icon: var(--size-16);
+}
+
+.ds-btn[data-size="32"] {
+  block-size: var(--size-32);
+  padding-inline: var(--p-8);
+  gap: var(--gap-4);
+  font-size: var(--text-label-sm);
+  --btn-icon: var(--size-12);
+}
+
+/* isOnlyIcon: ancho = alto */
+.ds-btn[data-only-icon] {
+  padding-inline: var(--p-none);
+}
+
+.ds-btn[data-only-icon][data-size="48"] {
+  inline-size: var(--size-48);
+}
+
+.ds-btn[data-only-icon][data-size="40"] {
+  inline-size: var(--size-40);
+}
+
+.ds-btn[data-only-icon][data-size="32"] {
+  inline-size: var(--size-32);
+}
+
+.ds-btn[data-only-icon] .ds-btn__label {
+  display: none;
+}
+
+/* --- Contenido --- */
+.ds-btn__icon,
+.ds-btn__spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--btn-icon);
+  block-size: var(--btn-icon);
+  flex: none;
+}
+
+.ds-btn__icon svg,
+.ds-btn__spinner svg {
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
+}
+
+.ds-btn__label {
+  display: inline-block;
+}
+
+/* --- Colores: solid --- */
+.ds-btn[data-variant="solid"][data-color="primary"] {
+  --btn-solid-bg: var(--bg-primary-default);
+  --btn-solid-fg: var(--text-primary-foreground);
+  --btn-solid-bg-hover: var(--bg-primary-light);
+  --btn-solid-bg-disabled: var(--bg-primary-lighten);
+  --btn-solid-fg-disabled: var(--text-primary-default);
+}
+
+.ds-btn[data-variant="solid"][data-color="secondary"] {
+  --btn-solid-bg: var(--bg-secondary-default);
+  --btn-solid-fg: var(--text-secondary-foreground);
+  --btn-solid-bg-hover: var(--bg-secondary-light);
+  --btn-solid-bg-disabled: var(--bg-secondary-lighten);
+  --btn-solid-fg-disabled: var(--text-secondary-default);
+}
+
+.ds-btn[data-variant="solid"][data-color="accent"] {
+  --btn-solid-bg: var(--bg-accent-default);
+  --btn-solid-fg: var(--text-accent-foreground);
+  --btn-solid-bg-hover: var(--bg-accent-light);
+  --btn-solid-bg-disabled: var(--bg-accent-lighten);
+  --btn-solid-fg-disabled: var(--text-accent-default);
+}
+
+.ds-btn[data-variant="solid"][data-color="subscription"] {
+  --btn-solid-bg: var(--bg-subscription-default);
+  --btn-solid-fg: var(--text-subscription-foreground);
+  --btn-solid-bg-hover: var(--bg-subscription-light);
+  --btn-solid-bg-disabled: var(--bg-subscription-lighten);
+  --btn-solid-fg-disabled: var(--text-subscription-default);
+}
+
+.ds-btn[data-variant="solid"][data-color="error"] {
+  --btn-solid-bg: var(--bg-error-default);
+  --btn-solid-fg: var(--text-error-foreground);
+  --btn-solid-bg-hover: var(--bg-error-light);
+  --btn-solid-bg-disabled: var(--bg-error-lighten);
+  --btn-solid-fg-disabled: var(--text-error-default);
+}
+
+.ds-btn[data-variant="solid"][data-color="black"] {
+  --btn-solid-bg: var(--bg-black-default);
+  --btn-solid-fg: var(--text-black-foreground);
+  --btn-solid-bg-hover: var(--bg-black-light);
+  --btn-solid-bg-disabled: var(--bg-black-lighten);
+  --btn-solid-fg-disabled: var(--text-black-default);
+}
+
+.ds-btn[data-variant="solid"][data-color="white"] {
+  --btn-solid-bg: var(--bg-white-default);
+  --btn-solid-fg: var(--text-white-foreground);
+  --btn-solid-bg-hover: var(--bg-white-light);
+  --btn-solid-bg-disabled: var(--bg-white-lighten);
+  /* TODO: token de texto disabled no definido en Figma:
+     --text-white-default sería invisible sobre --bg-white-lighten */
+  --btn-solid-fg-disabled: var(--text-white-foreground);
+}
+
+/* --- Colores: outline --- */
+.ds-btn[data-variant="outline"][data-color="primary"] {
+  --btn-out-border: var(--border-primary-default);
+  --btn-out-text: var(--text-primary-default);
+  --btn-out-border-hover: var(--border-primary-light);
+  --btn-out-text-hover: var(--text-primary-light);
+  --btn-out-border-disabled: var(--border-primary-lighten);
+  --btn-out-text-disabled: var(--text-primary-lighten);
+}
+
+.ds-btn[data-variant="outline"][data-color="secondary"] {
+  --btn-out-border: var(--border-secondary-default);
+  --btn-out-text: var(--text-secondary-default);
+  --btn-out-border-hover: var(--border-secondary-light);
+  --btn-out-text-hover: var(--text-secondary-light);
+  --btn-out-border-disabled: var(--border-secondary-lighten);
+  --btn-out-text-disabled: var(--text-secondary-lighten);
+}
+
+.ds-btn[data-variant="outline"][data-color="accent"] {
+  --btn-out-border: var(--border-accent-default);
+  --btn-out-text: var(--text-accent-default);
+  --btn-out-border-hover: var(--border-accent-light);
+  --btn-out-text-hover: var(--text-accent-light);
+  --btn-out-border-disabled: var(--border-accent-lighten);
+  --btn-out-text-disabled: var(--text-accent-lighten);
+}
+
+.ds-btn[data-variant="outline"][data-color="subscription"] {
+  --btn-out-border: var(--border-subscription-default);
+  --btn-out-text: var(--text-subscription-default);
+  --btn-out-border-hover: var(--border-subscription-light);
+  --btn-out-text-hover: var(--text-subscription-light);
+  --btn-out-border-disabled: var(--border-subscription-lighten);
+  --btn-out-text-disabled: var(--text-subscription-lighten);
+}
+
+.ds-btn[data-variant="outline"][data-color="error"] {
+  --btn-out-border: var(--border-error-default);
+  --btn-out-text: var(--text-error-default);
+  --btn-out-border-hover: var(--border-error-light);
+  --btn-out-text-hover: var(--text-error-light);
+  --btn-out-border-disabled: var(--border-error-lighten);
+  --btn-out-text-disabled: var(--text-error-lighten);
+}
+
+.ds-btn[data-variant="outline"][data-color="black"] {
+  --btn-out-border: var(--border-black-default);
+  --btn-out-text: var(--text-black-default);
+  --btn-out-border-hover: var(--border-black-light);
+  --btn-out-text-hover: var(--text-black-light);
+  --btn-out-border-disabled: var(--border-black-lighten);
+  --btn-out-text-disabled: var(--text-black-lighten);
+}
+
+.ds-btn[data-variant="outline"][data-color="white"] {
+  --btn-out-border: var(--border-white-default);
+  --btn-out-text: var(--text-white-default);
+  --btn-out-border-hover: var(--border-white-light);
+  --btn-out-text-hover: var(--text-white-light);
+  --btn-out-border-disabled: var(--border-white-lighten);
+  --btn-out-text-disabled: var(--text-white-lighten);
+}
+
+/* --- Colores: ghost --- */
+.ds-btn[data-variant="ghost"][data-color="primary"] {
+  --btn-gh-text: var(--text-primary-default);
+  --btn-gh-bg-hover: var(--bg-primary-default-opacity-15);
+  --btn-gh-text-disabled: var(--text-primary-lighten);
+}
+
+.ds-btn[data-variant="ghost"][data-color="secondary"] {
+  --btn-gh-text: var(--text-secondary-default);
+  --btn-gh-bg-hover: var(--bg-secondary-default-opacity-15);
+  --btn-gh-text-disabled: var(--text-secondary-lighten);
+}
+
+.ds-btn[data-variant="ghost"][data-color="accent"] {
+  --btn-gh-text: var(--text-accent-default);
+  --btn-gh-bg-hover: var(--bg-accent-default-opacity-15);
+  --btn-gh-text-disabled: var(--text-accent-lighten);
+}
+
+.ds-btn[data-variant="ghost"][data-color="subscription"] {
+  --btn-gh-text: var(--text-subscription-default);
+  --btn-gh-bg-hover: var(--bg-subscription-default-opacity-15);
+  --btn-gh-text-disabled: var(--text-subscription-lighten);
+}
+
+.ds-btn[data-variant="ghost"][data-color="error"] {
+  --btn-gh-text: var(--text-error-default);
+  --btn-gh-bg-hover: var(--bg-error-default-opacity-15);
+  --btn-gh-text-disabled: var(--text-error-lighten);
+}
+
+/* Excepción de nombre en Figma: black -> --bg-black-999-opacity-15 */
+.ds-btn[data-variant="ghost"][data-color="black"] {
+  --btn-gh-text: var(--text-black-default);
+  --btn-gh-bg-hover: var(--bg-black-999-opacity-15);
+  --btn-gh-text-disabled: var(--text-black-lighten);
+}
+
+/* Excepción de nombre en Figma: white -> --bg-white-1-15 */
+.ds-btn[data-variant="ghost"][data-color="white"] {
+  --btn-gh-text: var(--text-white-default);
+  --btn-gh-bg-hover: var(--bg-white-1-15);
+  --btn-gh-text-disabled: var(--text-white-lighten);
+}
+
+/* --- Variante outline --- */
+.ds-btn[data-variant="outline"] {
+  border-width: var(--components-button-weigth);
+  border-color: var(--btn-out-border);
+  background-color: transparent;
+  color: var(--btn-out-text);
+}
+
+/* --- Variante ghost --- */
+.ds-btn[data-variant="ghost"] {
+  background-color: transparent;
+  color: var(--btn-gh-text);
+}
+
+/* --- Estados: hover --- */
+.ds-btn[data-variant="solid"]:hover,
+.ds-btn[data-variant="solid"].is-hover,
+.ds-btn[data-variant="solid"][data-state="hover"] {
+  background-color: var(--btn-solid-bg-hover);
+}
+
+.ds-btn[data-variant="outline"]:hover,
+.ds-btn[data-variant="outline"].is-hover,
+.ds-btn[data-variant="outline"][data-state="hover"] {
+  border-color: var(--btn-out-border-hover);
+  color: var(--btn-out-text-hover);
+}
+
+.ds-btn[data-variant="ghost"]:hover,
+.ds-btn[data-variant="ghost"].is-hover,
+.ds-btn[data-variant="ghost"][data-state="hover"] {
+  background-color: var(--btn-gh-bg-hover);
+}
+
+/* --- Estados: disabled ---
+   El spec solo define el fondo (--bg-{color}-lighten); el texto desplazado
+   usa --text-{color}-default (ver TODO en la variante solid white). */
+.ds-btn[data-variant="solid"][data-state="disabled"],
+.ds-btn[data-variant="solid"].is-disabled,
+.ds-btn[data-variant="solid"]:disabled {
+  background-color: var(--btn-solid-bg-disabled);
+  color: var(--btn-solid-fg-disabled);
+}
+
+.ds-btn[data-variant="outline"][data-state="disabled"],
+.ds-btn[data-variant="outline"].is-disabled,
+.ds-btn[data-variant="outline"]:disabled {
+  border-color: var(--btn-out-border-disabled);
+  color: var(--btn-out-text-disabled);
+}
+
+.ds-btn[data-variant="ghost"][data-state="disabled"],
+.ds-btn[data-variant="ghost"].is-disabled,
+.ds-btn[data-variant="ghost"]:disabled {
+  background-color: transparent;
+  color: var(--btn-gh-text-disabled);
+}
+
+.ds-btn[data-state="disabled"],
+.ds-btn.is-disabled,
+.ds-btn:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --- Estado: loading (spinner en lugar del contenido, mantiene el ancho) --- */
+.ds-btn[data-state="loading"],
+.ds-btn.is-loading {
+  cursor: progress;
+  pointer-events: none;
+}
+
+.ds-btn[data-state="loading"] > *,
+.ds-btn.is-loading > * {
+  visibility: hidden;
+}
+
+.ds-btn[data-state="loading"] .ds-btn__spinner,
+.ds-btn.is-loading .ds-btn__spinner {
+  visibility: visible;
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  translate: -50% -50%;
+  animation: ds-spin 800ms linear infinite; /* TODO: token de duración no definido en Figma */
+}
+
+.ds-btn__spinner svg circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+
+.ds-btn__spinner svg .ds-spin-track {
+  stroke-opacity: var(--opacity-30);
+}
+
+.ds-btn__spinner svg .ds-spin-head {
+  stroke-width: var(--border-2);
+  stroke-dasharray: 25 100;
+}
+
+/* ==========================================================================
+   Input
+   Propiedades: labelType floating|fixed · color default|gray|error ·
+   size 56|48 · state enabled|hover|focus|disabled (error sin disabled) ·
+   ícono opcional izquierda/derecha con separador vertical ·
+   supporting text con ícono opcional.
+   ========================================================================== */
+
+.ds-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4); /* Fixed label: arriba del campo, a --gap-4 */
+  inline-size: 100%;
+}
+
+.ds-field__label {
+  font-size: var(--text-label-sm);
+  line-height: 1.2; /* TODO: token de line-height no definido en Figma (spec: 1.2) */
+  color: var(--text-base-default); /* TODO: color de label en reposo no definido en Figma */
+}
+
+.ds-field__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  padding-inline: var(--p-12);
+  min-block-size: var(--size-56);
+  border: var(--border-sm) solid var(--border-base-light);
+  border-radius: var(--components-input-radius);
+  background-color: transparent;
+  cursor: text;
+}
+
+.ds-field[data-size="48"] .ds-field__control {
+  min-block-size: var(--size-48);
+}
+
+.ds-field__input {
+  flex: 1;
+  min-inline-size: var(--size-0);
+  border: var(--border-none);
+  padding-block: var(--p-none);
+  background-color: transparent;
+  color: var(--text-base-default);
+  font-family: inherit;
+  font-size: var(--text-label-lg);
+  line-height: 1.2; /* TODO: token de line-height no definido en Figma (spec: 1.2) */
+  outline: var(--border-none);
+}
+
+.ds-field[data-size="48"] .ds-field__input {
+  font-size: var(--text-label-md);
+}
+
+.ds-field__input::placeholder {
+  color: var(--text-base-light);
+}
+
+.ds-field__input:focus {
+  outline: var(--border-none);
+}
+
+/* --- Íconos con separador vertical --- */
+.ds-field__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--size-24);
+  block-size: var(--size-24);
+  flex: none;
+  color: var(--text-base-default);
+  /* TODO: tamaño de ícono de input no definido en Figma (se toma --size-24 del Alert) */
+}
+
+.ds-field__icon svg {
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
+}
+
+/* TODO: color del separador vertical no definido en Figma */
+.ds-field__icon--start {
+  border-inline-end: var(--border-sm) solid var(--border-muted);
+}
+
+.ds-field__icon--end {
+  border-inline-start: var(--border-sm) solid var(--border-muted);
+}
+
+/* --- Supporting text --- */
+.ds-field__supporting {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-4);
+  font-size: var(--text-label-sm);
+  line-height: 1.2; /* TODO: token de line-height no definido en Figma (spec: 1.2) */
+  color: var(--text-base-default); /* TODO: color de supporting text no definido en Figma */
+}
+
+.ds-field__supporting .ds-field__icon {
+  inline-size: var(--size-16);
+  block-size: var(--size-16);
+}
+
+/* --- Color: gray --- */
+.ds-field[data-color="gray"] .ds-field__control {
+  background-color: var(--bg-neutral-50);
+}
+
+/* --- Color: error --- */
+.ds-field[data-color="error"] .ds-field__control {
+  border-color: var(--border-error-default);
+}
+
+.ds-field[data-color="error"] .ds-field__label,
+.ds-field[data-color="error"] .ds-field__supporting {
+  color: var(--text-error-default);
+}
+
+/* --- Estados (reales y forzados) --- */
+.ds-field__control:hover,
+.ds-field.is-hover .ds-field__control {
+  border-color: var(--border-base-default);
+}
+
+.ds-field__control:focus-within,
+.ds-field.is-focus .ds-field__control {
+  border-color: var(--border-base-dark);
+  outline: var(--border-2) solid var(--border-base-dark);
+  outline-offset: calc(var(--border-2) * -1);
+}
+
+.ds-field[data-color="error"] .ds-field__control:hover,
+.ds-field[data-color="error"].is-hover .ds-field__control {
+  border-color: var(--border-error-light);
+}
+
+.ds-field[data-color="error"] .ds-field__control:focus-within,
+.ds-field[data-color="error"].is-focus .ds-field__control {
+  border-color: var(--border-error-dark);
+  outline-color: var(--border-error-dark);
+}
+
+/* --- Estado: disabled (no aplica a color=error, según spec) --- */
+.ds-field[data-state="disabled"] .ds-field__control,
+.ds-field.is-disabled .ds-field__control,
+.ds-field__control:has(.ds-field__input:disabled) {
+  border-color: var(--border-base-lighten);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ds-field[data-state="disabled"] .ds-field__input,
+.ds-field.is-disabled .ds-field__input,
+.ds-field__input:disabled,
+.ds-field[data-state="disabled"] .ds-field__label,
+.ds-field.is-disabled .ds-field__label,
+.ds-field[data-state="disabled"] .ds-field__supporting,
+.ds-field.is-disabled .ds-field__supporting {
+  color: var(--text-base-lighten);
+}
+
+.ds-field[data-state="disabled"] .ds-field__input::placeholder,
+.ds-field.is-disabled .ds-field__input::placeholder,
+.ds-field__input:disabled::placeholder {
+  color: var(--text-base-lighten);
+}
+
+/* --- Label floating --- */
+.ds-field[data-label-type="floating"] .ds-field__label {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--p-12);
+  translate: 0 -50%;
+  margin: var(--p-none);
+  padding-inline: var(--p-4);
+  background-color: var(--field-label-bg);
+  color: var(--text-base-light); /* TODO: color de label en reposo no definido en Figma */
+  pointer-events: none;
+}
+
+.ds-field[data-label-type="floating"] .ds-field__control {
+  --field-label-bg: var(--bg-neutral-1);
+}
+
+/* TODO: fondo de label floating en variante gray no definido en Figma */
+.ds-field[data-label-type="floating"][data-color="gray"] .ds-field__control {
+  --field-label-bg: var(--bg-neutral-50);
+}
+
+.ds-field[data-label-type="floating"] .ds-field__input:focus ~ .ds-field__label,
+.ds-field[data-label-type="floating"] .ds-field__input:not(:placeholder-shown) ~ .ds-field__label,
+.ds-field[data-label-type="floating"].is-focus .ds-field__label,
+.ds-field[data-label-type="floating"].has-value .ds-field__label {
+  inset-block-start: var(--size-0);
+}
+
+.ds-field[data-label-type="floating"][data-color="error"] .ds-field__label {
+  color: var(--text-error-default);
+}
+
+.ds-field[data-label-type="floating"][data-color="error"] .ds-field__input:focus ~ .ds-field__label,
+.ds-field[data-label-type="floating"][data-color="error"] .ds-field__input:not(:placeholder-shown) ~ .ds-field__label,
+.ds-field[data-label-type="floating"][data-color="error"].is-focus .ds-field__label,
+.ds-field[data-label-type="floating"][data-color="error"].has-value .ds-field__label {
+  color: var(--text-error-default);
+}
+
+/* El label floating no debe pisar el ícono inicial */
+.ds-field[data-label-type="floating"] .ds-field__control:has(.ds-field__icon--start) .ds-field__label {
+  inset-inline-start: calc(var(--p-12) + var(--size-24) + var(--gap-8));
+}
+
+/* ==========================================================================
+   Chip
+   Propiedades: type informative|clickable|closable · variant solid|outline|
+   ghost · color primary|secondary|accent|error|black|white · size 30|24 ·
+   state default|hover|disabled (informative solo default) · ícono opcional;
+   closable agrega separador y "×".
+   ========================================================================== */
+
+.ds-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+  padding: var(--p-8); /* size 30 por defecto */
+  font-size: var(--text-label-md);
+  border: var(--border-none) solid transparent;
+  border-radius: var(--components-chip-radius);
+  background-color: var(--chip-solid-bg, transparent);
+  color: var(--chip-solid-fg, inherit);
+  font-weight: var(--font-weight-bold);
+  line-height: 1; /* TODO: token de line-height no definido en Figma (spec: 1) */
+  cursor: default;
+}
+
+.ds-chip[data-size="24"] {
+  padding: var(--p-6);
+  font-size: var(--text-label-sm);
+  --chip-icon: var(--size-12);
+}
+
+.ds-chip[data-size="30"] {
+  --chip-icon: var(--size-14);
+}
+
+.ds-chip[data-type="clickable"],
+.ds-chip[data-type="closable"] {
+  cursor: pointer;
+}
+
+/* --- Contenido --- */
+.ds-chip__icon {
+  display: inline-flex;
+  inline-size: var(--chip-icon);
+  block-size: var(--chip-icon);
+  flex: none;
+}
+
+.ds-chip__icon svg {
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
+}
+
+.ds-chip__label {
+  display: inline-block;
+}
+
+/* --- Colores: solid --- */
+.ds-chip[data-variant="solid"][data-color="primary"] {
+  --chip-solid-bg: var(--bg-primary-default);
+  --chip-solid-fg: var(--text-primary-foreground);
+  --chip-solid-bg-hover: var(--bg-primary-light);
+  --chip-solid-bg-disabled: var(--bg-primary-lighten);
+}
+
+.ds-chip[data-variant="solid"][data-color="secondary"] {
+  --chip-solid-bg: var(--bg-secondary-default);
+  --chip-solid-fg: var(--text-secondary-foreground);
+  --chip-solid-bg-hover: var(--bg-secondary-light);
+  --chip-solid-bg-disabled: var(--bg-secondary-lighten);
+}
+
+.ds-chip[data-variant="solid"][data-color="accent"] {
+  --chip-solid-bg: var(--bg-accent-default);
+  --chip-solid-fg: var(--text-accent-foreground);
+  --chip-solid-bg-hover: var(--bg-accent-light);
+  --chip-solid-bg-disabled: var(--bg-accent-lighten);
+}
+
+.ds-chip[data-variant="solid"][data-color="error"] {
+  --chip-solid-bg: var(--bg-error-default);
+  --chip-solid-fg: var(--text-error-foreground);
+  --chip-solid-bg-hover: var(--bg-error-light);
+  --chip-solid-bg-disabled: var(--bg-error-lighten);
+}
+
+.ds-chip[data-variant="solid"][data-color="black"] {
+  --chip-solid-bg: var(--bg-black-default);
+  --chip-solid-fg: var(--text-black-foreground);
+  --chip-solid-bg-hover: var(--bg-black-light);
+  --chip-solid-bg-disabled: var(--bg-black-lighten);
+}
+
+.ds-chip[data-variant="solid"][data-color="white"] {
+  --chip-solid-bg: var(--bg-white-default);
+  --chip-solid-fg: var(--text-white-foreground);
+  --chip-solid-bg-hover: var(--bg-white-light);
+  --chip-solid-bg-disabled: var(--bg-white-lighten);
+}
+
+/* --- Colores: outline --- */
+.ds-chip[data-variant="outline"][data-color="primary"] {
+  --chip-out-border: var(--border-primary-default);
+  --chip-out-text: var(--text-primary-default);
+  --chip-out-border-hover: var(--border-primary-light);
+  --chip-out-text-hover: var(--text-primary-light);
+  --chip-out-border-disabled: var(--border-primary-lighten);
+  --chip-out-text-disabled: var(--text-primary-lighten);
+}
+
+.ds-chip[data-variant="outline"][data-color="secondary"] {
+  --chip-out-border: var(--border-secondary-default);
+  --chip-out-text: var(--text-secondary-default);
+  --chip-out-border-hover: var(--border-secondary-light);
+  --chip-out-text-hover: var(--text-secondary-light);
+  --chip-out-border-disabled: var(--border-secondary-lighten);
+  --chip-out-text-disabled: var(--text-secondary-lighten);
+}
+
+.ds-chip[data-variant="outline"][data-color="accent"] {
+  --chip-out-border: var(--border-accent-default);
+  --chip-out-text: var(--text-accent-default);
+  --chip-out-border-hover: var(--border-accent-light);
+  --chip-out-text-hover: var(--text-accent-light);
+  --chip-out-border-disabled: var(--border-accent-lighten);
+  --chip-out-text-disabled: var(--text-accent-lighten);
+}
+
+.ds-chip[data-variant="outline"][data-color="error"] {
+  --chip-out-border: var(--border-error-default);
+  --chip-out-text: var(--text-error-default);
+  --chip-out-border-hover: var(--border-error-light);
+  --chip-out-text-hover: var(--text-error-light);
+  --chip-out-border-disabled: var(--border-error-lighten);
+  --chip-out-text-disabled: var(--text-error-lighten);
+}
+
+.ds-chip[data-variant="outline"][data-color="black"] {
+  --chip-out-border: var(--border-black-default);
+  --chip-out-text: var(--text-black-default);
+  --chip-out-border-hover: var(--border-black-light);
+  --chip-out-text-hover: var(--text-black-light);
+  --chip-out-border-disabled: var(--border-black-lighten);
+  --chip-out-text-disabled: var(--text-black-lighten);
+}
+
+.ds-chip[data-variant="outline"][data-color="white"] {
+  --chip-out-border: var(--border-white-default);
+  --chip-out-text: var(--text-white-default);
+  --chip-out-border-hover: var(--border-white-light);
+  --chip-out-text-hover: var(--text-white-light);
+  --chip-out-border-disabled: var(--border-white-lighten);
+  --chip-out-text-disabled: var(--text-white-lighten);
+}
+
+/* --- Colores: ghost ---
+   Ghost hover en Chip: fondo --bg-{color}-light con texto
+   --text-{color}-foreground (a diferencia de Button). */
+.ds-chip[data-variant="ghost"][data-color="primary"] {
+  --chip-gh-text: var(--text-primary-default);
+  --chip-gh-bg-hover: var(--bg-primary-light);
+  --chip-gh-fg-hover: var(--text-primary-foreground);
+  --chip-gh-text-disabled: var(--text-primary-lighten);
+}
+
+.ds-chip[data-variant="ghost"][data-color="secondary"] {
+  --chip-gh-text: var(--text-secondary-default);
+  --chip-gh-bg-hover: var(--bg-secondary-light);
+  --chip-gh-fg-hover: var(--text-secondary-foreground);
+  --chip-gh-text-disabled: var(--text-secondary-lighten);
+}
+
+.ds-chip[data-variant="ghost"][data-color="accent"] {
+  --chip-gh-text: var(--text-accent-default);
+  --chip-gh-bg-hover: var(--bg-accent-light);
+  --chip-gh-fg-hover: var(--text-accent-foreground);
+  --chip-gh-text-disabled: var(--text-accent-lighten);
+}
+
+.ds-chip[data-variant="ghost"][data-color="error"] {
+  --chip-gh-text: var(--text-error-default);
+  --chip-gh-bg-hover: var(--bg-error-light);
+  --chip-gh-fg-hover: var(--text-error-foreground);
+  --chip-gh-text-disabled: var(--text-error-lighten);
+}
+
+.ds-chip[data-variant="ghost"][data-color="black"] {
+  --chip-gh-text: var(--text-black-default);
+  --chip-gh-bg-hover: var(--bg-black-light);
+  --chip-gh-fg-hover: var(--text-black-foreground);
+  --chip-gh-text-disabled: var(--text-black-lighten);
+}
+
+.ds-chip[data-variant="ghost"][data-color="white"] {
+  --chip-gh-text: var(--text-white-default);
+  --chip-gh-bg-hover: var(--bg-white-light);
+  --chip-gh-fg-hover: var(--text-white-foreground);
+  --chip-gh-text-disabled: var(--text-white-lighten);
+}
+
+/* --- Variantes --- */
+.ds-chip[data-variant="outline"] {
+  border-width: var(--border-sm); /* TODO: ancho de borde del Chip no definido en Figma */
+  border-color: var(--chip-out-border);
+  background-color: transparent;
+  color: var(--chip-out-text);
+}
+
+.ds-chip[data-variant="ghost"] {
+  background-color: transparent;
+  color: var(--chip-gh-text);
+}
+
+/* --- Estados --- */
+.ds-chip[data-type="clickable"]:hover,
+.ds-chip[data-type="clickable"].is-hover,
+.ds-chip[data-type="clickable"][data-state="hover"],
+.ds-chip[data-type="closable"]:hover,
+.ds-chip[data-type="closable"].is-hover,
+.ds-chip[data-type="closable"][data-state="hover"] {
+  cursor: pointer;
+}
+
+.ds-chip[data-variant="solid"][data-type="clickable"]:hover,
+.ds-chip[data-variant="solid"][data-type="clickable"].is-hover,
+.ds-chip[data-variant="solid"][data-type="clickable"][data-state="hover"],
+.ds-chip[data-variant="solid"][data-type="closable"]:hover,
+.ds-chip[data-variant="solid"][data-type="closable"].is-hover,
+.ds-chip[data-variant="solid"][data-type="closable"][data-state="hover"] {
+  background-color: var(--chip-solid-bg-hover);
+}
+
+.ds-chip[data-variant="outline"][data-type="clickable"]:hover,
+.ds-chip[data-variant="outline"][data-type="clickable"].is-hover,
+.ds-chip[data-variant="outline"][data-type="clickable"][data-state="hover"],
+.ds-chip[data-variant="outline"][data-type="closable"]:hover,
+.ds-chip[data-variant="outline"][data-type="closable"].is-hover,
+.ds-chip[data-variant="outline"][data-type="closable"][data-state="hover"] {
+  border-color: var(--chip-out-border-hover);
+  color: var(--chip-out-text-hover);
+}
+
+.ds-chip[data-variant="ghost"][data-type="clickable"]:hover,
+.ds-chip[data-variant="ghost"][data-type="clickable"].is-hover,
+.ds-chip[data-variant="ghost"][data-type="clickable"][data-state="hover"],
+.ds-chip[data-variant="ghost"][data-type="closable"]:hover,
+.ds-chip[data-variant="ghost"][data-type="closable"].is-hover,
+.ds-chip[data-variant="ghost"][data-type="closable"][data-state="hover"] {
+  background-color: var(--chip-gh-bg-hover);
+  color: var(--chip-gh-fg-hover);
+}
+
+.ds-chip[data-state="disabled"],
+.ds-chip.is-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ds-chip[data-variant="solid"][data-state="disabled"],
+.ds-chip[data-variant="solid"].is-disabled {
+  background-color: var(--chip-solid-bg-disabled);
+}
+
+.ds-chip[data-variant="outline"][data-state="disabled"],
+.ds-chip[data-variant="outline"].is-disabled {
+  border-color: var(--chip-out-border-disabled);
+  color: var(--chip-out-text-disabled);
+}
+
+.ds-chip[data-variant="ghost"][data-state="disabled"],
+.ds-chip[data-variant="ghost"].is-disabled {
+  background-color: transparent;
+  color: var(--chip-gh-text-disabled);
+}
+
+/* --- Closable --- */
+.ds-chip__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--chip-icon);
+  block-size: var(--chip-icon);
+  flex: none;
+  padding: var(--p-none);
+  margin-inline-start: var(--gap-4);
+  border: var(--border-none);
+  /* TODO: color del separador del Chip closable no definido en Figma */
+  border-inline-start: var(--border-sm) solid currentColor;
+  padding-inline-start: var(--gap-4);
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ds-chip__close svg {
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   Badge
+   Propiedades: color primary|secondary|accent|subscription|error|black|white ·
+   variant solid|outline · size lg|md|sm (mapeo interpretado: el spec solo
+   lista los tokens posibles) · on-image light|dark.
+   ========================================================================== */
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+  padding: var(--p-4) var(--p-8);
+  font-size: var(--text-label-md);
+  border: var(--border-none) solid transparent;
+  border-radius: var(--components-Badge-radius);
+  background-color: var(--badge-bg, transparent);
+  color: var(--badge-fg, inherit);
+  font-weight: var(--font-weight-bold);
+  line-height: 1; /* TODO: token de line-height no definido en Figma (spec: 1) */
+  text-transform: uppercase;
+}
+
+.ds-badge[data-size="md"] {
+  padding: var(--p-4) var(--p-6);
+  font-size: var(--text-label-sm);
+  gap: var(--gap-4);
+}
+
+.ds-badge[data-size="sm"] {
+  padding: var(--p-4);
+  font-size: var(--text-small-md);
+  gap: var(--gap-2);
+}
+
+/* --- solid --- */
+.ds-badge[data-variant="solid"][data-color="primary"] {
+  --badge-bg: var(--bg-primary-default);
+  --badge-fg: var(--text-primary-foreground);
+}
+
+.ds-badge[data-variant="solid"][data-color="secondary"] {
+  --badge-bg: var(--bg-secondary-default);
+  --badge-fg: var(--text-secondary-foreground);
+}
+
+.ds-badge[data-variant="solid"][data-color="accent"] {
+  --badge-bg: var(--bg-accent-default);
+  --badge-fg: var(--text-accent-foreground);
+}
+
+.ds-badge[data-variant="solid"][data-color="subscription"] {
+  --badge-bg: var(--bg-subscription-default);
+  --badge-fg: var(--text-subscription-foreground);
+}
+
+.ds-badge[data-variant="solid"][data-color="error"] {
+  --badge-bg: var(--bg-error-default);
+  --badge-fg: var(--text-error-foreground);
+}
+
+.ds-badge[data-variant="solid"][data-color="black"] {
+  --badge-bg: var(--bg-black-default);
+  --badge-fg: var(--text-black-foreground);
+}
+
+.ds-badge[data-variant="solid"][data-color="white"] {
+  --badge-bg: var(--bg-white-default);
+  --badge-fg: var(--text-white-foreground);
+}
+
+/* --- outline --- */
+.ds-badge[data-variant="outline"] {
+  /* TODO: ancho de borde del Badge no definido en Figma */
+  border-width: var(--border-sm);
+  background-color: transparent;
+}
+
+.ds-badge[data-variant="outline"][data-color="primary"] {
+  --badge-bg: transparent;
+  --badge-fg: var(--text-primary-default);
+  border-color: var(--border-primary-default);
+}
+
+.ds-badge[data-variant="outline"][data-color="secondary"] {
+  --badge-bg: transparent;
+  --badge-fg: var(--text-secondary-default);
+  border-color: var(--border-secondary-default);
+}
+
+.ds-badge[data-variant="outline"][data-color="accent"] {
+  --badge-bg: transparent;
+  --badge-fg: var(--text-accent-default);
+  border-color: var(--border-accent-default);
+}
+
+.ds-badge[data-variant="outline"][data-color="subscription"] {
+  --badge-bg: transparent;
+  --badge-fg: var(--text-subscription-default);
+  border-color: var(--border-subscription-default);
+}
+
+.ds-badge[data-variant="outline"][data-color="error"] {
+  --badge-bg: transparent;
+  --badge-fg: var(--text-error-default);
+  border-color: var(--border-error-default);
+}
+
+.ds-badge[data-variant="outline"][data-color="black"] {
+  --badge-bg: transparent;
+  --badge-fg: var(--text-black-default);
+  border-color: var(--border-black-default);
+}
+
+.ds-badge[data-variant="outline"][data-color="white"] {
+  --badge-bg: transparent;
+  --badge-fg: var(--text-white-default);
+  border-color: var(--border-white-default);
+}
+
+/* --- Sobre imágenes --- */
+.ds-badge[data-on-image="light"] {
+  background-color: var(--bg-neutral-1-60);
+  /* TODO: color de texto sobre imagen no definido en Figma */
+  color: var(--text-neutral-999);
+}
+
+.ds-badge[data-on-image="dark"] {
+  background-color: var(--bg-neutral-999-60);
+  /* TODO: color de texto sobre imagen no definido en Figma */
+  color: var(--text-neutral-1);
+}
+
+/* ==========================================================================
+   Alert
+   Propiedades: type success|info|warning|error|skeleton · style light|solid.
+   Estructura: ícono circular (--size-24) + título + descripción + slot.
+   ========================================================================== */
+
+.ds-alert,
+.ds-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-8);
+  padding: var(--p-16);
+  border: var(--border-none) solid transparent;
+  border-radius: var(--components-alert-radius);
+  background-color: var(--al-bg, transparent);
+  border-color: var(--al-border, transparent);
+  color: var(--al-text, inherit);
+}
+
+.ds-alert__icon,
+.ds-toast__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--size-24);
+  block-size: var(--size-24);
+  flex: none;
+  border-radius: var(--radius-full);
+  background-color: var(--al-icon-bg);
+  color: var(--al-icon-fg);
+}
+
+.ds-alert__icon svg,
+.ds-toast__icon svg {
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
+}
+
+.ds-alert__body,
+.ds-toast__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4); /* TODO: gap interno del contenido no definido en Figma */
+  inline-size: 100%;
+}
+
+.ds-alert__title,
+.ds-toast__title {
+  margin: var(--p-none);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2; /* TODO: token de line-height no definido en Figma (spec: 1.2) */
+  color: var(--al-title);
+}
+
+.ds-alert__desc,
+.ds-toast__desc {
+  margin: var(--p-none);
+  font-size: var(--text-body-sm);
+  line-height: 1.5; /* TODO: token de line-height no definido en Figma (spec: 1.5) */
+  color: var(--al-desc);
+}
+
+.ds-alert__slot,
+.ds-toast__slot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-8);
+  margin-block-start: var(--gap-4);
+}
+
+/* --- Tipos: light --- */
+.ds-alert[data-type="success"][data-style="light"],
+.ds-toast[data-type="success"][data-style="light"] {
+  --al-bg: var(--bg-success-lighten);
+  --al-border: var(--border-success-default);
+  --al-text: var(--text-base-default);
+  --al-title: var(--text-success-default);
+  --al-desc: var(--text-base-default);
+  --al-icon-bg: var(--bg-success-default);
+  --al-icon-fg: var(--text-success-foreground);
+}
+
+.ds-alert[data-type="info"][data-style="light"],
+.ds-toast[data-type="info"][data-style="light"] {
+  --al-bg: var(--bg-info-lighten);
+  --al-border: var(--border-info-default);
+  --al-text: var(--text-base-default);
+  --al-title: var(--text-info-default);
+  --al-desc: var(--text-base-default);
+  --al-icon-bg: var(--bg-info-default);
+  --al-icon-fg: var(--text-info-foregorund); /* TODO: token --text-info-foreground no existe: typo en el export de Figma (--text-info-foregorund) */
+}
+
+.ds-alert[data-type="warning"][data-style="light"],
+.ds-toast[data-type="warning"][data-style="light"] {
+  --al-bg: var(--bg-warning-lighten);
+  --al-border: var(--border-warning-default);
+  --al-text: var(--text-base-default);
+  --al-title: var(--text-warning-default);
+  --al-desc: var(--text-base-default);
+  --al-icon-bg: var(--bg-warning-default);
+  --al-icon-fg: var(--text-warning-foreground);
+}
+
+.ds-alert[data-type="error"][data-style="light"],
+.ds-toast[data-type="error"][data-style="light"] {
+  --al-bg: var(--bg-error-lighten);
+  --al-border: var(--border-error-default);
+  --al-text: var(--text-base-default);
+  --al-title: var(--text-error-default);
+  --al-desc: var(--text-base-default);
+  --al-icon-bg: var(--bg-error-default);
+  --al-icon-fg: var(--text-error-foreground);
+}
+
+/* --- Tipos: solid --- */
+.ds-alert[data-type="success"][data-style="solid"],
+.ds-toast[data-type="success"][data-style="solid"] {
+  --al-bg: var(--bg-success-default);
+  --al-border: var(--bg-success-default);
+  --al-text: var(--text-success-foreground);
+  --al-title: var(--text-success-foreground);
+  --al-desc: var(--text-success-foreground);
+  --al-icon-bg: var(--bg-success-foreground);
+  --al-icon-fg: var(--text-success-default);
+}
+
+.ds-alert[data-type="info"][data-style="solid"],
+.ds-toast[data-type="info"][data-style="solid"] {
+  --al-bg: var(--bg-info-default);
+  --al-border: var(--bg-info-default);
+  --al-text: var(--text-info-foregorund); /* TODO: token --text-info-foreground no existe: typo en el export de Figma (--text-info-foregorund) */
+  --al-title: var(--text-info-foregorund);
+  --al-desc: var(--text-info-foregorund);
+  --al-icon-bg: var(--bg-info-foreground);
+  --al-icon-fg: var(--text-info-foregorund);
+}
+
+.ds-alert[data-type="warning"][data-style="solid"],
+.ds-toast[data-type="warning"][data-style="solid"] {
+  --al-bg: var(--bg-warning-default);
+  --al-border: var(--bg-warning-default);
+  --al-text: var(--text-warning-foreground);
+  --al-title: var(--text-warning-foreground);
+  --al-desc: var(--text-warning-foreground);
+  --al-icon-bg: var(--bg-warning-foreground);
+  --al-icon-fg: var(--text-warning-default);
+}
+
+.ds-alert[data-type="error"][data-style="solid"],
+.ds-toast[data-type="error"][data-style="solid"] {
+  --al-bg: var(--bg-error-default);
+  --al-border: var(--bg-error-default);
+  --al-text: var(--text-error-foreground);
+  --al-title: var(--text-error-foreground);
+  --al-desc: var(--text-error-foreground);
+  --al-icon-bg: var(--bg-error-foreground);
+  --al-icon-fg: var(--text-error-default);
+}
+
+/* --- Skeleton --- */
+.ds-alert[data-type="skeleton"],
+.ds-toast[data-type="skeleton"] {
+  --al-bg: transparent;
+  --al-border: var(--border-skeleton);
+  --al-text: var(--bg-skeleton);
+  --al-title: var(--bg-skeleton);
+  --al-desc: var(--bg-skeleton);
+  --al-icon-bg: var(--bg-skeleton);
+  --al-icon-fg: transparent;
+}
+
+.ds-alert[data-type="skeleton"] .ds-alert__icon,
+.ds-toast[data-type="skeleton"] .ds-toast__icon {
+  border-radius: var(--radius-full);
+}
+
+.ds-alert[data-type="skeleton"] .ds-alert__title,
+.ds-alert[data-type="skeleton"] .ds-alert__desc,
+.ds-toast[data-type="skeleton"] .ds-toast__title,
+.ds-toast[data-type="skeleton"] .ds-toast__desc {
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-skeleton);
+  color: transparent;
+}
+
+.ds-alert[data-type="skeleton"] .ds-alert__title,
+.ds-toast[data-type="skeleton"] .ds-toast__title {
+  block-size: var(--size-16);
+  inline-size: 40%; /* TODO: ancho del bloque de skeleton no definido en Figma */
+}
+
+.ds-alert[data-type="skeleton"] .ds-alert__desc,
+.ds-toast[data-type="skeleton"] .ds-toast__desc {
+  block-size: var(--size-12);
+  inline-size: 80%; /* TODO: ancho del bloque de skeleton no definido en Figma */
+}
+
+/* ==========================================================================
+   Toast
+   Mismos tipos que Alert. Radio --components-toast-radius.
+   ========================================================================== */
+
+.ds-toast {
+  border-radius: var(--components-toast-radius);
+  /* TODO: token de sombra no definido en Figma */
+}
+
+/* ==========================================================================
+   Card
+   ========================================================================== */
+
+.ds-card {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  border: var(--border-sm) solid var(--border-muted);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-neutral-1);
+  overflow: hidden;
+}
+
+.ds-card__media {
+  inline-size: 100%;
+  aspect-ratio: 16 / 9; /* TODO: proporción de imagen no definida en Figma */
+  background-color: var(--bg-skeleton);
+}
+
+.ds-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-8);
+  padding: var(--p-16);
+}
+
+.ds-card__title {
+  margin: var(--p-none);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2; /* TODO: token de line-height no definido en Figma (spec: 1.2) */
+  color: var(--text-base-default);
+}
+
+.ds-card__text {
+  margin: var(--p-none);
+  font-size: var(--text-body-md);
+  line-height: 1.5; /* TODO: token de line-height no definido en Figma (spec: 1.5) */
+  color: var(--text-base-light);
+}

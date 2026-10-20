@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es" data-brand="foodit">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System La Nación — Core / Foodit</title>
+
+<!-- Orden de carga de tokens -->
+<link rel="stylesheet" href="global-primitives.css">
+<link rel="stylesheet" href="foodit.css">
+<link rel="stylesheet" href="core-semantic.css">
+<link rel="stylesheet" href="components.css">
+
+<style>
+  body {
+    margin: var(--p-none);
+    background-color: var(--bg-neutral-1);
+    color: var(--text-neutral-900);
+    font-family: var(--font-secondary), sans-serif;
+  }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-32);
+    padding: var(--p-responsive);
+    max-inline-size: var(--breakpoint-web-lg);
+    margin-inline: auto;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--gap-16);
+    padding-block-end: var(--p-16);
+    border-block-end: var(--border-sm) solid var(--border-muted);
+  }
+
+  .topbar__brand {
+    margin: var(--p-none);
+    font-size: var(--text-body-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-16);
+  }
+
+  .intro h1 {
+    margin: var(--p-none);
+    font-family: var(--font-primary), serif;
+    font-size: var(--text-heading-lg);
+    line-height: 1.2; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .intro p {
+    margin: var(--p-none);
+    font-size: var(--text-body-md);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-600);
+  }
+
+  .intro ol {
+    margin: var(--p-none);
+    padding-inline-start: var(--p-20);
+    font-size: var(--text-body-md);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-900);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--breakpoint-web-sm), 1fr));
+    gap: var(--gap-24);
+  }
+
+  .grid .ds-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-16);
+    padding: var(--p-24);
+  }
+
+  .grid .ds-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-8);
+    margin-block-start: auto;
+  }
+
+  .note {
+    font-size: var(--text-small-lg);
+    line-height: 1.5; /* TODO: token de line-height no definido en Figma */
+    color: var(--text-neutral-600);
+  }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+  <header class="topbar">
+    <p class="topbar__brand">Design System La Nación — Core</p>
+    <button
+      class="ds-btn"
+      type="button"
+      id="mode-toggle"
+      data-variant="outline"
+      data-color="black"
+      data-size="32"
+      aria-pressed="false">
+      <span class="ds-btn__label">Modo oscuro</span>
+    </button>
+  </header>
+
+  <section class="intro">
+    <h1>Foodit · tokens y componentes</h1>
+    <p>
+      Esta carpeta contiene el Design System de La Nación exportado de Figma.
+      Los archivos de tokens no se modifican: se consumen tal cual.
+    </p>
+    <ol>
+      <li><code>global-primitives.css</code> — [BASE] Primitive (Global).</li>
+      <li><code>foodit.css</code> — foundations de la marca (<code>--foo-*</code>).</li>
+      <li><code>core-semantic.css</code> — tokens de Core (los que usan los componentes).</li>
+      <li><code>components.css</code> — componentes de <code>design-system-spec.md</code>.</li>
+    </ol>
+  </section>
+
+  <section class="grid">
+    <article class="ds-card">
+      <p class="ds-card__body" style="padding: var(--p-none); gap: var(--gap-8);">
+        <span class="ds-card__title">Documentación</span>
+        <span class="ds-card__text">
+          Catálogo de tokens (color, tipografía, espaciados, radios) y de cada
+          componente con todas sus variantes y estados.
+        </span>
+      </p>
+      <p class="ds-card__actions">
+        <a class="ds-btn" href="docs.html" data-variant="solid" data-color="primary" data-size="40">
+          <span class="ds-btn__label">Abrir docs.html</span>
+        </a>
+      </p>
+    </article>
+
+    <article class="ds-card">
+      <p class="ds-card__body" style="padding: var(--p-none); gap: var(--gap-8);">
+        <span class="ds-card__title">Prototipo</span>
+        <span class="ds-card__text">
+          Pantalla de Foodit (detalle de receta) armada solo con los
+          componentes: chips, botones, input de búsqueda, alert y toast.
+        </span>
+      </p>
+      <p class="ds-card__actions">
+        <a class="ds-btn" href="prototipo/index.html" data-variant="solid" data-color="primary" data-size="40">
+          <span class="ds-btn__label">Abrir prototipo</span>
+        </a>
+      </p>
+    </article>
+  </section>
+
+  <p class="note">
+    Marca y modo se definen en &lt;html&gt;: <code>data-brand="foodit"</code> y,
+    para modo oscuro, <code>data-mode="dark"</code>. El switch de arriba agrega o
+    quita ese atributo.
+  </p>
+
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var toggle = document.getElementById('mode-toggle');
+  var label = toggle.querySelector('.ds-btn__label');
+
+  toggle.addEventListener('click', function () {
+    var isDark = root.getAttribute('data-mode') === 'dark';
+    if (isDark) {
+      root.removeAttribute('data-mode');
+    } else {
+      root.setAttribute('data-mode', 'dark');
+    }
+    var dark = root.getAttribute('data-mode') === 'dark';
+    toggle.setAttribute('aria-pressed', String(dark));
+    label.textContent = dark ? 'Modo claro' : 'Modo oscuro';
+  });
+})();
+</script>
+</body>
+</html>
